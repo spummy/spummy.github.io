@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teejys</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    background-color: #000; /* all black background */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* full screen */
+    text-align: center;
+    padding: 20px;
+  }
+  img.profile {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 30px;
+  }
+  p.quote {
+    font-style: italic;
+    font-size: 1.5em;
+    margin: 0;
+  }
+  p.author {
+    font-size: 1em;
+    color: #ccc;
+    margin-bottom: 40px;
+  }
+  a.link {
+    display: block;
+    margin: 10px 0;
+    padding: 12px 20px;
+    width: 200px;
+    max-width: 80%;
+    text-decoration: none;
+    color: #fff;
+    background-color: #222;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+  a.link:hover {
+    background-color: #555;
+  }
+  .bandcamp {
+    margin-top: 30px;
+    font-size: 1em;
+    text-decoration: none;
+    color: #fff;
+    border: 0px solid #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s;
+  }
+  .bandcamp:hover {
+    background-color: #fff;
+    color: #000;
+  }
+</style>
+</head>
+<body>
+
+<!-- Profile Image (starts static) -->
+<img src="profile-static.png" alt="Teejys" class="profile" id="profile">
+
+<!-- Audio -->
+<audio id="bg-music" loop>
+  <source src="jam 9 loopable.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const profile = document.getElementById('profile');
+  const audio = document.getElementById('bg-music');
+
+  // Track whether music is playing
+  let isPlaying = false;
+
+  profile.addEventListener('click', () => {
+    if (!isPlaying) {
+      profile.src = 'profile.gif'; // switch to animated GIF
+      audio.play();                // play audio
+      isPlaying = true;
+    } else {
+      profile.src = 'profile-static.png'; // back to static
+      audio.pause();                      // pause audio
+      audio.currentTime = 0;              // reset to start
+      isPlaying = false;
+    }
+  });
+</script>
+
+
+
+<!-- Quote -->
+<p class="quote">"The sun loves you, and I love you too!"</p>
+<p class="author">- teejys</p>
+
+<!-- Social Media Links -->
+<a class="link" href="https://www.youtube.com/@teejys">YouTube</a>
+<a class="link" href="https://www.instagram.com/teejys">Instagram</a>
+<a class="link" href="https://www.tiktok.com/@teejys">TikTok</a>
+
+<!-- Bandcamp -->
+<a class="bandcamp" href="https://learningstages.bandcamp.com">Bandcamp</a>
+
+</body>
+</html>
+
