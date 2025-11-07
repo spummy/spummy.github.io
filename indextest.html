@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pinch me, for I am awake.</title>
+  <link rel="icon" type="image/png" href="profile-static.png">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E39MEFZ62H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E39MEFZ62H');
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      text-align: center;
+      padding: 40px 20px;
+      transition: background-color 1s ease;
+    }
+    img.profile {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 30px;
+      cursor: pointer;
+      transition: opacity 1s ease;
+    }
+    p.quote {
+      font-style: italic;
+      font-size: 1.5em;
+      margin: 0;
+    }
+    p.author {
+      font-size: 1em;
+      color: #ccc;
+      margin-bottom: 40px;
+    }
+    a.link {
+      display: block;
+      margin: 10px 0;
+      padding: 12px 20px;
+      width: 200px;
+      max-width: 80%;
+      text-decoration: none;
+      color: #fff;
+      background-color: #222;
+      border-radius: 8px;
+      transition: background 0.3s, opacity 1s ease;
+    }
+    a.link:hover {
+      background-color: #555;
+    }
+    .bandcamp {
+      margin-top: 30px;
+      font-size: 1em;
+      text-decoration: none;
+      color: #fff;
+      border: 0px solid #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background 0.3s, color 0.3s, opacity 1s ease;
+    }
+    .bandcamp:hover {
+      background-color: #fff;
+      color: #000;
+    }
+    section#audio-section {
+      margin-top: 60px;
+      text-align: center;
+      width: 100%;
+    }
+    section#audio-section h2 {
+      font-family: 'Courier New', monospace;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    audio {
+      width: 80%;
+      max-width: 500px;
+      outline: none;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    .download-btn {
+      display: inline-block;
+      margin-top: 14px;
+      background: rgba(255,255,255,0.08);
+      color: #00bfff;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 10px 22px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    .download-btn:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    /* Glitch effect */
+    @keyframes glitch {
+      0% { transform: translate(2px, -2px); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, 2px); }
+      60% { transform: translate(-2px, -2px); }
+      80% { transform: translate(2px, 0px); }
+      100% { transform: translate(0); }
+    }
+    .glitch { animation: glitch 0.8s infinite; }
+  </style>
+</head>
+<body>
+
+  <img src="profile-static.png" alt="Teejys" class="profile" id="profile">
+
+  <div id="main-content">
+    <p class="quote">"The sun loves you, and I love you too!"</p>
+    <p style="font-size: 0.9em; opacity: 0.8; margin-top: 4px;">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
+    <p class="author">teejys, <a href="https://learningstages.bandcamp.com/track/bruises-single" target="_blank">bruises</a></p>
+
+    <div id="dead-section" style="display:none; opacity:0; transition:opacity 1.2s ease;">
+      <h2>he's dead...</h2>
+      <audio id="dead-audio" controls>
+        <source src="bruises midi.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <br>
+      <a href="bruises midi.mp3"
+         download
+         class="download-btn"
+         onclick="gtag('event', 'download', { event_category: 'Music', event_label: 'Bruises MIDI Demo', value: 1 });">
+         check his body
+      </a>
+    </div>
+  </div>
+
+  <a class="link" href="https://www.youtube.com/@teejys">YouTube</a>
+  <a class="link" href="https://www.instagram.com/teejys">Instagram</a>
+  <a class="link" href="https://www.tiktok.com/@teejys">TikTok</a>
+  <a class="link" href="https://learningstages.bandcamp.com">Bandcamp</a>
+  <a class="bandcamp" href="mailto:sup@teejys.com">Email</a>
+
+  <script>
+    const profile = document.getElementById('profile');
+    const mainContent = document.getElementById('main-content');
+    const deadSection = document.getElementById('dead-section');
+    const deadAudio = document.getElementById('dead-audio');
+    const body = document.body;
+    let triggered = false;
+
+    profile.addEventListener('click', () => {
+      if (triggered) return;
+      triggered = true;
+
+      // Fade main content a bit
+      mainContent.style.transition = 'opacity 1s ease';
+      mainContent.style.opacity = '0.4';
+
+      // Fade but keep links clickable
+      document.querySelectorAll('.link, .bandcamp').forEach(el => {
+        el.style.transition = 'opacity 1s ease';
+        el.style.opacity = '0.3';
+      });
+
+      // Change image
+      profile.src = 'hesdead.gif';
+
+      // Reveal audio player
+      setTimeout(() => {
+        deadSection.style.display = 'block';
+        setTimeout(() => deadSection.style.opacity = '1', 200);
+        deadAudio.play();
+      }, 1500);
+
+      // When audio ends
+      deadAudio.addEventListener('ended', () => {
+        body.classList.add('glitch');
+        body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:40vh;font-family:monospace;'>refresh.</h1>";
+      });
+    });
+  </script>
+
+</body>
+</html>
