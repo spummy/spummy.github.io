@@ -1,8 +1,7 @@
 title: Teejys Diary
-email: "" # optional
-description: "The personal diary and thoughts of Teejys, with posts, music, and more."
-baseurl: "/diary" # since your repo is 'diary'
-url: "https://spummy.github.io" # GitHub Pages base URL
+description: "Teejys personal diary"
+baseurl: "/diary"   # your GitHub repo name
+url: "https://spummy.github.io"
 theme: minima
 plugins:
   - jekyll-feed
