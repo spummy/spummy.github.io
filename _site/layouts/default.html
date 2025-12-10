@@ -3,25 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }} | Teejys Diary</title>
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link rel="icon" href="/assets/profile-static.png">
   <link rel="stylesheet" href="/assets/main.css">
 </head>
 <body>
-  <header>
-    <h1><a href="{{ site.url }}">Teejys Diary</a></h1>
-    <p>{{ site.description }}</p>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/blog">Blog</a>
+
+<header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" href="/">{{ site.title }}</a>
+    <nav class="site-nav">
+      <a class="page-link" href="/about/">About</a>
+      <a class="page-link" href="/diary/">Diary</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main>
+<main class="page-content">
+  <div class="wrapper">
     {{ content }}
-  </main>
+  </div>
+</main>
 
-  <footer>
-    <p>© 2025 Teejys. All rights reserved.</p>
-  </footer>
+<footer class="site-footer">
+  <div class="wrapper">
+    <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
+  </div>
+</footer>
+
 </body>
 </html>
