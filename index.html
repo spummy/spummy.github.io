@@ -4,16 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pinch me, for I am awake.</title>
-  <link rel="icon" type="image/png" href="profile-static.png">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E39MEFZ62H"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-E39MEFZ62H');
-  </script>
+  <link rel="icon" type="image/png" href="assets/images/profile-static.png">
 
   <style>
     body {
@@ -24,11 +15,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
       min-height: 100vh;
       text-align: center;
       padding: 40px 20px;
-      transition: background-color 1s ease;
     }
     img.profile {
       width: 200px;
@@ -42,80 +31,63 @@
       font-size: 1.5em;
       margin: 0;
     }
-    p.author {
-      font-size: 1em;
-      color: #ccc;
-      margin-bottom: 40px;
+    p.subquote {
+      font-size: 0.9em;
+      opacity: 0.8;
+      margin-top: 4px;
+      margin-bottom: 10px;
     }
     a.link {
       display: block;
-      margin: 10px auto;
+      margin: 12px auto;
       padding: 12px 20px;
-      width: 200px;
+      width: 220px;
       max-width: 80%;
       text-decoration: none;
       color: #fff;
       background-color: #222;
       border-radius: 8px;
       transition: background 0.3s, opacity 0.3s ease;
-  
-
+      text-align: center;
     }
     a.link:hover {
       background-color: #555;
     }
-    .bandcamp {
-      margin-top: 30px;
-      font-size: 1em;
-      text-decoration: none;
-      color: #fff;
-      border: 0px solid #fff;
-      padding: 10px 20px;
-      border-radius: 8px;
-      transition: background 0.3s, color 0.3s, opacity 0.3s ease;
-    }
-    .bandcamp:hover {
-      background-color: #fff;
-      color: #000;
-    }
-    audio {
-      display: none; /* hide audio controls */
-    }
     .cashapp-img {
-      width: 75px; /* half the previous width */
+      width: 75px; /* half-size */
       height: auto;
       border-radius: 8px;
       cursor: pointer;
       transition: opacity 0.3s ease;
+      margin-top: 30px;
+    }
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <img src="profile-static.png" alt="Teejys" class="profile" id="profile">
+  <img src="assets/images/profile-static.png" alt="Teejys" class="profile" id="profile">
 
-  <div id="main-content">
-    <p class="quote">"The sun loves you, and I love you too!"</p>
-    <p style="font-size: 0.9em; opacity: 0.8; margin-top: 4px;">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
-    <p class="author">teejys</p>
+  <p class="quote">"The sun loves you, and I love you too!"</p>
+  <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
 
-    <!-- Blog button -->
-    <a class="link" href="https://spummy.github.io/teejys-diary/" Diary</a>
-  </div>
+  <!-- Buttons -->
+  <a class="link" href="https://spummy.github.io/diary/" target="_blank">Diary</a>
+  <a class="link" href="https://www.facebook.com/teejysfacebook" target="_blank">Facebook</a>
+  <a class="link" href="https://www.youtube.com/@teejys" target="_blank">YouTube</a>
+  <a class="link" href="https://www.instagram.com/teejys" target="_blank">Instagram</a>
+  <a class="link" href="https://www.tiktok.com/@teejys" target="_blank">TikTok</a>
+  <a class="link" href="https://learningstages.bandcamp.com" target="_blank">Bandcamp</a>
 
-  <a class="link" href="https://www.facebook.com/teejysfacebook">Facebook</a>
-  <a class="link" href="https://www.youtube.com/@teejys">YouTube</a>
-  <a class="link" href="https://www.instagram.com/teejys">Instagram</a>
-  <a class="link" href="https://www.tiktok.com/@teejys">TikTok</a>
-  <a class="link" href="https://learningstages.bandcamp.com">Bandcamp</a>
-
-  <!-- CashApp Button -->
-  <a href="https://cash.app/$teejyscash" target="_blank" style="margin-top:30px;">
-    <img src="cashapp.jpg" alt="CashApp" class="cashapp-img">
+  <!-- CashApp -->
+  <a href="https://cash.app/$teejyscash" target="_blank">
+    <img src="assets/images/cashapp.jpg" alt="CashApp" class="cashapp-img">
   </a>
 
   <!-- Background Audio -->
-  <audio id="background-audio" src="jam 9 loopable.mp3" loop></audio>
+  <audio id="background-audio" src="assets/audio/jam 9 loopable.mp3" loop></audio>
 
   <script>
     const profile = document.getElementById('profile');
@@ -124,13 +96,13 @@
 
     profile.addEventListener('click', () => {
       if (!isPlaying) {
-        profile.src = 'profile.gif';
+        profile.src = 'assets/images/profile.gif';
         backgroundAudio.play();
         isPlaying = true;
       } else {
-        profile.src = 'profile-static.png';
+        profile.src = 'assets/images/profile-static.png';
         backgroundAudio.pause();
-        backgroundAudio.currentTime = 0; // reset to start
+        backgroundAudio.currentTime = 0;
         isPlaying = false;
       }
     });
