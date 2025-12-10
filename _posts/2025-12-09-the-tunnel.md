@@ -2,34 +2,39 @@
 *song-philosophy, creative-process, worldbuilding, community, gratitude, artistic-vision*
 
 
-![[cool new fan.png]]
+
+!\[Cool new fan](/assets/images/cool%20new%20fan.png)
+
+
+
 
 
 On the notion of my [most recent original acoustic song video](https://youtube.com/shorts/Pc62VHsKtDo)...
 
-Would you guys like me to tell u when i wrote these songs in the video's descriptions? 
+Would you guys like me to tell u when i wrote these songs in the video's descriptions?
 
 I think that information is a fun, but I try to leave stuffz like that out as to not muddy any waters.
 
-Any time I perform, I want to do my best to honor the song as much as I can, however feels right to me emotionally in that moment. 
+Any time I perform, I want to do my best to honor the song as much as I can, however feels right to me emotionally in that moment.
 
-It's cool too, cuz any time i play one of my songs for u guys, chances are, it'll be slightly different than any other time i've played it. In my opinion, even the smallest difference creates a completely new experience for us to enjoy. That can be a simple note change, to the way I soften or harden my voice. This too is another reason why I enjoy the jazz mindset so much!***
+It's cool too, cuz any time i play one of my songs for u guys, chances are, it'll be slightly different than any other time i've played it. In my opinion, even the smallest difference creates a completely new experience for us to enjoy. That can be a simple note change, to the way I soften or harden my voice. This too is another reason why I enjoy the jazz mindset so much!\*\*\*
 
 .
 .
 
 
-I feel like for u guyz, adding extra details could muddy the perception of hearing a song for the first time. I'm down to give fun facts about my headspace when writing these songs, or any other details you may be interested in, if yous want! 
+
+I feel like for u guyz, adding extra details could muddy the perception of hearing a song for the first time. I'm down to give fun facts about my headspace when writing these songs, or any other details you may be interested in, if yous want!
 
 I think I have at least 1 abstract detail/connection for each song.
 
-Anyways, please do ask any clarifying questions about my art, mindset or philosophies whenever they pop up! 
+Anyways, please do ask any clarifying questions about my art, mindset or philosophies whenever they pop up!
 
 I usually try to let the art speak for itself, but as a psychology and philosophy oriented person, I understand that interpretations of any artistic works can benefit from the insights of the author.
 
 So, let me know if ur curious!
 
-I have lots i wanna say, tho i really am in no rush to let it all out at once! Doing slow drips keeps things fresh anyways, and it gives a chance for any passerbyers to join in on the experience too without feeling like they need to do a lot of catch up work. 
+I have lots i wanna say, tho i really am in no rush to let it all out at once! Doing slow drips keeps things fresh anyways, and it gives a chance for any passerbyers to join in on the experience too without feeling like they need to do a lot of catch up work.
 
 (Tho i try to structure the delivery of my art where it invites the curious to dig deeper if they want. It's partially why I enjoy the concept of "feeding into my abyss" so much. Since the beginning, i have always favored depth over instant delivery. Those who are curious have a long breadcrumb trail to follow, and i try not to spoil the rewards by dumping it all in one place.)
 
@@ -40,7 +45,7 @@ I have lots i wanna say, tho i really am in no rush to let it all out at once! D
 
 I'm sure one of these days, after i pop off and become a global sensation, i'll get a really astute interviewer who can help me appreciate this heaping pile of  (sh)art in a way we can all enjoy, anywayz.
 
-I'm just happy to be riding in the first place... and I am so thankful for everyone who is strolling along! Or should i say, uhhh scrolling! A heh.. tehe... 
+I'm just happy to be riding in the first place... and I am so thankful for everyone who is strolling along! Or should i say, uhhh scrolling! A heh.. tehe...
 
 anyways, i'm sure that is all obvious to anyone who has been around for more than 20 minutes of consuming my work..
 
@@ -59,12 +64,15 @@ I see the future already, and we.. myself and y'all, the Teejsters.... are going
 And we will serve as anchors for the cultures of the world for generations to come, as far as my little asian blind eyes can see..
 
 
+
 I hope you are all ready.
 
 Tho I am sure our independent lives will have an endless amount of new pits and tunnels to drive thru....
 
 
+
 I have no doubt in my mind that in this tunnel right now.. in my little echo chamber of niche obscurity and absurd mental health awareness (or unawareness heh, if u were here last year you would get it.)
+
 
 
 That faint glimmer in the distance will be within arms reach before any of us know it!
@@ -85,11 +93,14 @@ Thx for reading, truly.
 Care.
 
 
+
 Tj out.
 
 
-![[cool new fan.png]]
+
+!\[\[cool new fan.png]]
 
 I have always seen my songs as standards (like Jazz Standards, where they have a loose form and anyone can integrate their own personalities in its expession!). So, you already know I have an endless amount of content coming our way :D
 
-So again, please feel free 2 request any of my songs any time, and I'll get to it sooner than later! 
+So again, please feel free 2 request any of my songs any time, and I'll get to it sooner than later!
+

@@ -1,23 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-12-09T22:14:57-06:00</updated><id>/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="/jekyll/update/2025/12/09/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2025-12-09T21:59:12-06:00</published><updated>2025-12-09T21:59:12-06:00</updated><id>/jekyll/update/2025/12/09/welcome-to-jekyll</id><content type="html" xml:base="/jekyll/update/2025/12/09/welcome-to-jekyll.html"><![CDATA[<p>You’ll find this post in your <code class="language-plaintext highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="language-plaintext highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-12-09T22:31:12-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Teejys Diary</title><entry><title type="html">Welcome</title><link href="http://localhost:4000/2025/12/09/welcome.html" rel="alternate" type="text/html" title="Welcome" /><published>2025-12-09T00:00:00-06:00</published><updated>2025-12-09T00:00:00-06:00</updated><id>http://localhost:4000/2025/12/09/welcome</id><content type="html" xml:base="http://localhost:4000/2025/12/09/welcome.html"><![CDATA[<p>Dear Diary,
+ I realized that I have so much goin on in my mind… and I forgot that I was a (terrible) writer hehe.
+Plus, I have been wondering how I can bridge my communities.. It’s weird having separate audiences in Youtube, Tiktok, or Instagram.</p>
 
-<p>Jekyll requires blog post files to be named according to the following format:</p>
+<p>I was thinking about doing a mailing list, which I still may do for some reason (idk. entrepreneurs recommend it, so I’ll try it! I think it’s smart in the sense that any or all of my accounts could get banned, and I would lose all touch w the homies in an instant…)</p>
 
-<p><code class="language-plaintext highlighter-rouge">YEAR-MONTH-DAY-title.MARKUP</code></p>
+<p>But yeah, what better way to ramble my nonsense, and incoherently witness myself in the form of written word than to add a blog to my website, a project which… exists! :D</p>
 
-<p>Where <code class="language-plaintext highlighter-rouge">YEAR</code> is a four-digit number, <code class="language-plaintext highlighter-rouge">MONTH</code> and <code class="language-plaintext highlighter-rouge">DAY</code> are both two-digit numbers, and <code class="language-plaintext highlighter-rouge">MARKUP</code> is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<p>like, whoaa. I have a website, haha.</p>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<p>That’s so cool. I should be utilizing this more! There is so much more potential than I know.</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+<p>Annyywayyzz, so yeah.</p>
 
-<p>Check out the <a href="https://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>]]></content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html"><![CDATA[You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.]]></summary></entry><entry><title type="html">The Tunnel</title><link href="/2025/12/09/the-tunnel.html" rel="alternate" type="text/html" title="The Tunnel" /><published>2025-12-09T00:00:00-06:00</published><updated>2025-12-09T00:00:00-06:00</updated><id>/2025/12/09/the-tunnel</id><content type="html" xml:base="/2025/12/09/the-tunnel.html"><![CDATA[<p><strong>December 9th, 2025</strong>
+<p>WELCOME to the blog!</p>
+
+<p>See you in the next post besties.</p>
+
+<p>(don’t  talk to me don’t look at me don’t smell at me don’t you even think about it!)</p>
+
+<p>nah, you can talk to me tho.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Dear Diary, I realized that I have so much goin on in my mind… and I forgot that I was a (terrible) writer hehe. Plus, I have been wondering how I can bridge my communities.. It’s weird having separate audiences in Youtube, Tiktok, or Instagram.]]></summary></entry><entry><title type="html">The Tunnel</title><link href="http://localhost:4000/2025/12/09/the-tunnel.html" rel="alternate" type="text/html" title="The Tunnel" /><published>2025-12-09T00:00:00-06:00</published><updated>2025-12-09T00:00:00-06:00</updated><id>http://localhost:4000/2025/12/09/the-tunnel</id><content type="html" xml:base="http://localhost:4000/2025/12/09/the-tunnel.html"><![CDATA[<p><strong>December 9th, 2025</strong>
 <em>song-philosophy, creative-process, worldbuilding, community, gratitude, artistic-vision</em></p>
 
-<p>![[cool new fan.png]]</p>
+<p>![Cool new fan](/assets/images/cool%20new%20fan.png)</p>
 
 <p>On the notion of my <a href="https://youtube.com/shorts/Pc62VHsKtDo">most recent original acoustic song video</a>…</p>
 
@@ -100,24 +104,4 @@
 
 <p>I have always seen my songs as standards (like Jazz Standards, where they have a loose form and anyone can integrate their own personalities in its expession!). So, you already know I have an endless amount of content coming our way :D</p>
 
-<p>So again, please feel free 2 request any of my songs any time, and I’ll get to it sooner than later!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[December 9th, 2025 song-philosophy, creative-process, worldbuilding, community, gratitude, artistic-vision]]></summary></entry><entry><title type="html">Welcome</title><link href="/2025/12/09/welcome.html" rel="alternate" type="text/html" title="Welcome" /><published>2025-12-09T00:00:00-06:00</published><updated>2025-12-09T00:00:00-06:00</updated><id>/2025/12/09/welcome</id><content type="html" xml:base="/2025/12/09/welcome.html"><![CDATA[<p>Dear Diary,
- I realized that I have so much goin on in my mind… and I forgot that I was a (terrible) writer hehe.
-Plus, I have been wondering how I can bridge my communities.. It’s weird having separate audiences in Youtube, Tiktok, or Instagram.</p>
-
-<p>I was thinking about doing a mailing list, which I still may do for some reason (idk. entrepreneurs recommend it, so I’ll try it! I think it’s smart in the sense that any or all of my accounts could get banned, and I would lose all touch w the homies in an instant…)</p>
-
-<p>But yeah, what better way to ramble my nonsense, and incoherently witness myself in the form of written word than to add a blog to my website, a project which… exists! :D</p>
-
-<p>like, whoaa. I have a website, haha.</p>
-
-<p>That’s so cool. I should be utilizing this more! There is so much more potential than I know.</p>
-
-<p>Annyywayyzz, so yeah.</p>
-
-<p>WELCOME to the blog!</p>
-
-<p>See you in the next post besties.</p>
-
-<p>(don’t  talk to me don’t look at me don’t smell at me don’t you even think about it!)</p>
-
-<p>nah, you can talk to me tho.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Dear Diary, I realized that I have so much goin on in my mind… and I forgot that I was a (terrible) writer hehe. Plus, I have been wondering how I can bridge my communities.. It’s weird having separate audiences in Youtube, Tiktok, or Instagram.]]></summary></entry></feed>
+<p>So again, please feel free 2 request any of my songs any time, and I’ll get to it sooner than later!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[December 9th, 2025 song-philosophy, creative-process, worldbuilding, community, gratitude, artistic-vision]]></summary></entry></feed>
