@@ -1,6 +1,0 @@
-Tempo:  198
-Key:    G
-Beats:  Y
-Notes:  Y
-Chords: Y
-Melody: Y

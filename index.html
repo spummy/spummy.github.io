@@ -35,7 +35,7 @@
       height: 200px;
       margin-bottom: 30px;
       cursor: pointer;
-      transition: opacity 1s ease;
+      transition: opacity 0.5s ease;
     }
     p.quote {
       font-style: italic;
@@ -57,7 +57,7 @@
       color: #fff;
       background-color: #222;
       border-radius: 8px;
-      transition: background 0.3s, opacity 1s ease;
+      transition: background 0.3s, opacity 0.3s ease;
     }
     a.link:hover {
       background-color: #555;
@@ -70,57 +70,22 @@
       border: 0px solid #fff;
       padding: 10px 20px;
       border-radius: 8px;
-      transition: background 0.3s, color 0.3s, opacity 1s ease;
+      transition: background 0.3s, color 0.3s, opacity 0.3s ease;
     }
     .bandcamp:hover {
       background-color: #fff;
       color: #000;
     }
-    section#audio-section {
-      margin-top: 60px;
-      text-align: center;
-      width: 100%;
-    }
-    section#audio-section h2 {
-      font-family: 'Courier New', monospace;
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-      color: #fff;
-    }
     audio {
-      width: 80%;
-      max-width: 500px;
-      outline: none;
+      display: none; /* hide audio controls */
+    }
+    .cashapp-img {
+      width: 75px; /* half the previous width */
+      height: auto;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      transition: opacity 0.3s ease;
     }
-    .download-btn {
-      display: inline-block;
-      margin-top: 14px;
-      background: rgba(255,255,255,0.08);
-      color: #00bfff;
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 10px 22px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-    }
-    .download-btn:hover {
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-    }
-
-    /* Glitch effect */
-    @keyframes glitch {
-      0% { transform: translate(2px, -2px); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(2px, 2px); }
-      60% { transform: translate(-2px, -2px); }
-      80% { transform: translate(2px, 0px); }
-      100% { transform: translate(0); }
-    }
-    .glitch { animation: glitch 0.8s infinite; }
   </style>
 </head>
 <body>
@@ -130,22 +95,10 @@
   <div id="main-content">
     <p class="quote">"The sun loves you, and I love you too!"</p>
     <p style="font-size: 0.9em; opacity: 0.8; margin-top: 4px;">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
-    <p class="author">teejys, <a href="https://learningstages.bandcamp.com/track/bruises-single" target="_blank">bruises</a></p>
+    <p class="author">teejys</p>
 
-    <div id="dead-section" style="display:none; opacity:0; transition:opacity 1.2s ease;">
-      <h2>he's dead...</h2>
-      <audio id="dead-audio" controls>
-        <source src="bruises midi.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-      <br>
-      <a href="bruises midi.mp3"
-         download
-         class="download-btn"
-         onclick="gtag('event', 'download', { event_category: 'Music', event_label: 'Bruises MIDI Demo', value: 1 });">
-         check his body
-      </a>
-    </div>
+    <!-- Blog button -->
+    <a class="link" href="https://YOURUSERNAME.github.io/teejys-diary/" target="_blank">Blog</a>
   </div>
 
   <a class="link" href="https://www.facebook.com/teejysfacebook">Facebook</a>
@@ -153,51 +106,31 @@
   <a class="link" href="https://www.instagram.com/teejys">Instagram</a>
   <a class="link" href="https://www.tiktok.com/@teejys">TikTok</a>
   <a class="link" href="https://learningstages.bandcamp.com">Bandcamp</a>
-  
-
 
   <!-- CashApp Button -->
-<a href="https://cash.app/$teejyscash" target="_blank" style="margin-top:30px;">
-  <img src="cashapp.jpg" alt="CashApp" style="width:150px; height:auto; border-radius:8px; cursor:pointer; transition:opacity 0.3s ease;">
-</a>
+  <a href="https://cash.app/$teejyscash" target="_blank" style="margin-top:30px;">
+    <img src="cashapp.jpg" alt="CashApp" class="cashapp-img">
+  </a>
+
+  <!-- Background Audio -->
+  <audio id="background-audio" src="jam 9 loopable.mp3" loop></audio>
 
   <script>
     const profile = document.getElementById('profile');
-    const mainContent = document.getElementById('main-content');
-    const deadSection = document.getElementById('dead-section');
-    const deadAudio = document.getElementById('dead-audio');
-    const body = document.body;
-    let triggered = false;
+    const backgroundAudio = document.getElementById('background-audio');
+    let isPlaying = false;
 
     profile.addEventListener('click', () => {
-      if (triggered) return;
-      triggered = true;
-
-      // Fade main content a bit
-      mainContent.style.transition = 'opacity 1s ease';
-      mainContent.style.opacity = '0.4';
-
-      // Fade but keep links clickable
-      document.querySelectorAll('.link, .bandcamp').forEach(el => {
-        el.style.transition = 'opacity 1s ease';
-        el.style.opacity = '0.3';
-      });
-
-      // Change image
-      profile.src = 'hesdead.gif';
-
-      // Reveal audio player
-      setTimeout(() => {
-        deadSection.style.display = 'block';
-        setTimeout(() => deadSection.style.opacity = '1', 200);
-        deadAudio.play();
-      }, 1500);
-
-      // When audio ends
-      deadAudio.addEventListener('ended', () => {
-        body.classList.add('glitch');
-        body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:40vh;font-family:monospace;'>refresh.</h1>";
-      });
+      if (!isPlaying) {
+        profile.src = 'profile.gif';
+        backgroundAudio.play();
+        isPlaying = true;
+      } else {
+        profile.src = 'profile-static.png';
+        backgroundAudio.pause();
+        backgroundAudio.currentTime = 0; // reset to start
+        isPlaying = false;
+      }
     });
   </script>
 
