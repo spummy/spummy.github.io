@@ -20,14 +20,14 @@
 
 title: Teejys Diary
 baseurl: ""       # leave empty if deploying at root
-url: "https://spummy.github.io/teejys-diary"
+url: "teejys.com"
 markdown: kramdown
 collections:
   posts:
     output: true
 
 # Build settings
-theme: jekyll-theme-cayman
+theme: null
 plugins:
   - jekyll-feed
 
