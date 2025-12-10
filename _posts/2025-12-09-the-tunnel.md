@@ -3,7 +3,9 @@
 
 
 
-!\[Cool new fan](/assets/images/cool%20new%20fan.png)
+!\[Cool Fan](/assets/images/cool-new-fan.png)
+
+
 
 
 
@@ -98,7 +100,7 @@ Tj out.
 
 
 
-!\[\[cool new fan.png]]
+
 
 I have always seen my songs as standards (like Jazz Standards, where they have a loose form and anyone can integrate their own personalities in its expession!). So, you already know I have an endless amount of content coming our way :D
 
