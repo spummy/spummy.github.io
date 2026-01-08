@@ -1,165 +1,108 @@
+@ -1,85 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>pinch me, for I am awake.</title>
-<link rel="icon" type="image/png" href="profile-static.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pinch me, for I am awake.</title>
+  <link rel="icon" type="image/png" href="assets/images/profile-static.png">
 
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Courier New', monospace;
-    background-color: #000;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-  }
-
-  img.profile {
-    width: 200px;
-    height: 200px;
-    margin-bottom: 30px;
-    cursor: pointer;
-  }
-
-  p.quote {
-    font-style: italic;
-    font-size: 1.5em;
-    margin: 0;
-  }
-
-  p.author {
-    font-size: 1em;
-    color: #ccc;
-    margin-bottom: 40px;
-  }
-
-  a.link {
-    display: block;              /* IMPORTANT */
-    margin: 10px 0;
-    padding: 12px 20px;
-    width: 200px;
-    max-width: 80%;
-    text-decoration: none;
-    color: #fff;
-    background-color: #222;
-    border-radius: 8px;
-    transition: background 0.3s;
-  }
-
-  a.link:hover {
-    background-color: #555;
-  }
-
-  .bandcamp {
-    margin-top: 30px;
-    font-size: 1em;
-    text-decoration: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    transition: background 0.3s, color 0.3s;
-  }
-
-  .bandcamp:hover {
-    background-color: #fff;
-    color: #000;
-  }
-
-  iframe.video-container {
-    width: 80%;
-    max-width: 800px;
-    height: 450px;
-    border: none;
-    margin-top: 20px;
-    display: none;
-  }
-</style>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    img.profile {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 30px;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+    }
+    p.quote {
+      font-style: italic;
+      font-size: 1.5em;
+      margin: 0;
+    }
+    p.subquote {
+      font-size: 0.9em;
+      opacity: 0.8;
+      margin-top: 4px;
+      margin-bottom: 10px;
+    }
+    a.link {
+      display: block;
+      margin: 12px auto;
+      padding: 12px 20px;
+      width: 220px;
+      max-width: 80%;
+      text-decoration: none;
+      color: #fff;
+      background-color: #222;
+      border-radius: 8px;
+      transition: background 0.3s, opacity 0.3s ease;
+      text-align: center;
+    }
+    a.link:hover {
+      background-color: #555;
+    }
+    .cashapp-img {
+      width: 75px; /* half-size */
+      height: auto;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      margin-top: 30px;
+    }
+    audio {
+      display: none;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- Profile Image -->
-<img src="profile-static.png" alt="Teejys" class="profile" id="profile">
+  <img src="assets/images/profile-static.png" alt="Teejys" class="profile" id="profile">
 
-<!-- Halloween Audio -->
-<audio id="halloween-audio">
-  <source src="halloween-audio.mp3" type="audio/mpeg">
-</audio>
-
-<!-- YouTube Video -->
-<iframe
-  id="youtube-video"
-  class="video-container"
-  src="https://www.youtube.com/embed/AadRc80Kjmw?autoplay=1"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen>
-</iframe>
-
-<!-- Quote & Author -->
-<div id="content" style="margin-bottom: 40px;">
   <p class="quote">"The sun loves you, and I love you too!"</p>
-  <p style="font-size: 0.9em; opacity: 0.8; margin-top: 4px;">
-    ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ
-  </p>
-  <p class="author">
-    teejys,
-    <a href="https://learningstages.bandcamp.com/track/bruises-single"
-       target="_blank"
-       rel="noopener">
-      bruises
-    </a>
-  </p>
-</div>
+  <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
 
-<!-- Social Media Links -->
-<div id="socials">
-  <a class="link" href="https://www.youtube.com/@teejys" target="_blank" rel="noopener">YouTube</a>
-  <a class="link" href="https://www.instagram.com/teejys" target="_blank" rel="noopener">Instagram</a>
-  <a class="link" href="https://www.tiktok.com/@teejys" target="_blank" rel="noopener">TikTok</a>
-  <a class="link" href="https://learningstages.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
-</div>
+  <!-- Buttons -->
+  <a class="link" href="https://discord.gg/gwCuT2SeFk" target="_blank">Discord</a>
+  <a class="link" href="https://teejys.substack.com" target="_blank">Diary</a>
+  <a class="link" href="https://www.facebook.com/teejysfacebook" target="_blank">Facebook</a>
+  <a class="link" href="https://www.youtube.com/@teejys" target="_blank">YouTube</a>
+  <a class="link" href="https://www.instagram.com/teejys" target="_blank">Instagram</a>
+  <a class="link" href="https://www.tiktok.com/@teejys" target="_blank">TikTok</a>
+  <a class="link" href="https://learningstages.bandcamp.com" target="_blank">Bandcamp</a>
+  
 
-<!-- Contact -->
-<a class="bandcamp" href="mailto:sup@teejys.com">Email</a>
-
-<script>
-const profile = document.getElementById('profile');
-const audio = document.getElementById('halloween-audio');
-const video = document.getElementById('youtube-video');
-const content = document.getElementById('content');
-const socials = document.getElementById('socials');
-const email = document.querySelector('.bandcamp');
-
-let clicked = false;
-
-profile.addEventListener('click', () => {
-  if (clicked) return;
-  clicked = true;
-
-  profile.src = 'profile 1 scary.gif';
-
-  content.style.display = 'none';
-  socials.style.display = 'none';
-  email.style.display = 'none';
-
-  audio.play();
-});
-
-audio.addEventListener('ended', () => {
-  video.style.display = 'block';
-});
-</script>
+  <!-- CashApp -->
+  <a href="https://cash.app/$teejyscash" target="_blank">
+@ -97,17 +98,19 @@
+    profile.addEventListener('click', () => {
+      if (!isPlaying) {
+        profile.src = 'assets/images/profile.gif';
+        backgroundAudio.play();
+        backgroundAudio.play().catch(err => {
+          console.log('Audio play prevented:', err);
+        });
+        isPlaying = true;
+      } else {
+        profile.src = 'assets/images/profile-static.png';
+        backgroundAudio.pause();
+        backgroundAudio.currentTime = 0;
+        isPlaying = false;
+      }
+    });
+  </script>
 
 </body>
 </html>
