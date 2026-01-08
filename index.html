@@ -1,42 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pinch me, for I am awake.</title>
+  <link rel="icon" type="image/png" href="assets/images/profile-static.png">
+  
+  <!-- Google Font for Feed the Abyss -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* General Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    img.profile {
+      width: 200px;
+      height: 200px;
+      max-width: 50vw;
+      max-height: 50vw;
+      margin-bottom: 30px;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+    }
+
+    p.quote {
+      font-style: italic;
+      font-size: 1.5em;
+      margin-bottom: 5px;
+    }
+
+    p.subquote {
+      font-size: 0.9em;
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 350px;
+      margin-bottom: 20px;
+    }
+
+    .link {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+      color: #fff;
+      background-color: #222;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 1em;
+      transition: background 0.3s, opacity 0.3s ease;
+      text-align: center;
+    }
+
+    .link:hover {
+      background-color: #555;
+      opacity: 1;
+    }
+
+    .feed-link {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 1em;
+    }
+
+    .substack-embed {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    iframe {
+      border: 1px solid #222;
+      border-radius: 8px;
+      background-color: #000;
+    }
+
+    .cashapp-img {
+      width: 75px;
+      height: auto;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      margin-top: 30px;
+      opacity: 0.7;
+    }
+
+    .cashapp-img:hover {
+      opacity: 1;
+    }
+
+    @media (max-width: 400px) {
+      .subquote {
+        font-size: 0.8em;
+      }
+
+      .link {
+        font-size: 0.9em;
+        padding: 10px 16px;
+      }
+
+      .feed-link {
+        font-size: 0.95em;
+      }
+
+      img.profile {
+        width: 40vw;
+        height: 40vw;
+      }
+    }
+
+  </style>
+</head>
 <body>
 
   <!-- Profile Image -->
   <img src="assets/images/profile-static.png" alt="Teejys" class="profile" id="profile">
 
-  <!-- Quote -->
+  <!-- Quotes -->
   <p class="quote">"The sun loves you, and I love you too!"</p>
   <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
 
   <!-- Buttons -->
-  <div style="display: flex; flex-direction: column; align-items: center;">
+  <div class="buttons">
     <a class="link" href="https://discord.gg/gwCuT2SeFk" target="_blank">Discord</a>
-    <a class="link" href="https://teejys.substack.com" target="_blank">Diary/Substack </a>
-    <a class="link" href="https://www.facebook.com/teejysfacebook" target="_blank">Facebook</a>
+    <a class="link" href="https://teejys.substack.com" target="_blank">Diary / Substack</a>
+    <a class="link" href="https://learningstages.bandcamp.com" target="_blank">Bandcamp</a>
     <a class="link" href="https://www.youtube.com/@teejys" target="_blank">YouTube</a>
     <a class="link" href="https://www.instagram.com/teejys" target="_blank">Instagram</a>
     <a class="link" href="https://www.tiktok.com/@teejys" target="_blank">TikTok</a>
-    <a class="link" href="https://learningstages.bandcamp.com" target="_blank">Bandcamp</a>
-  
+    <a class="link feed-link" href="https://cash.app/$teejyscash" target="_blank">Feed the Abyss — $teejyscash</a>
   </div>
 
-  <!-- Substack Embed Form -->
-  <div style="margin-top: 20px;">
-    <iframe src="https://teejys.substack.com/embed" 
-            width="300" height="200" 
-            style="border:1px solid #222; border-radius:8px; background-color:#000;" 
-            frameborder="0">
-    </iframe>
+  <!-- Substack Embed -->
+  <div class="substack-embed">
+    <iframe src="https://teejys.substack.com/embed" width="300" height="200" frameborder="0"></iframe>
   </div>
-
-  <!-- CashApp -->
-  <a href="https://cash.app/$teejyscash" target="_blank">
-    <img src="assets/images/cashapp.jpg" alt="CashApp" class="cashapp-img">
-  </a>
 
   <!-- Background Audio -->
   <audio id="background-audio" src="assets/audio/jan-4-drums-3.wav" loop></audio>
 
-  <!-- Script: Profile click to play/pause audio -->
   <script>
     const profile = document.getElementById('profile');
     const backgroundAudio = document.getElementById('background-audio');
@@ -57,3 +184,4 @@
   </script>
 
 </body>
+</html>
