@@ -18,55 +18,63 @@ html, body {
   overflow-x:hidden;
 }
 
-/* Profile / Audio Trigger */
+/* Profile GIF */
 img.profile {
   width:180px; height:180px;
   max-width:40vw; max-height:40vw;
   border-radius:50%;
   cursor:pointer;
-  transition: transform 0.5s;
   display:block;
   margin: 20px auto 40px auto;
+  transition: transform 0.5s;
 }
 img.profile:hover { transform:scale(1.05); }
 
-/* Quotes */
+/* Quote over shoulder */
 #quote-display { 
   position:absolute; 
   color:#fff; 
   font-family:'Cinzel', serif; 
   font-size:1em; 
   opacity:0; 
-  transition:opacity 0.5s; 
+  transition:opacity 0.3s; 
   white-space:nowrap;
 }
 
-/* Horizontal portal card carousel */
-.card-carousel-container {
+/* Card carousel viewport */
+.card-carousel-viewport {
   width: 90%;
+  max-width: 600px;
   margin: 0 auto 40px auto;
-  overflow-x: auto;
-  overflow-y: hidden;
-  display: flex;
-  gap: 15px;
-  scroll-behavior: smooth;
-  padding-bottom: 10px;
-}
-.card-carousel-container::-webkit-scrollbar {
-  height:6px;
-}
-.card-carousel-container::-webkit-scrollbar-thumb {
-  background:#555; border-radius:3px;
+  overflow-x: hidden;
+  position: relative;
+  height: 200px;
 }
 
+/* Inner carousel for scrolling */
+.card-carousel-inner {
+  display: flex;
+  gap: 15px;
+  height: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+.card-carousel-inner::-webkit-scrollbar { display: none; }
+
+/* Cards */
 .card {
-  flex: 0 0 auto;
-  width: 180px;
-  background:#111; border:1px solid #222; border-radius:12px;
-  padding:15px 20px; font-family:'Cinzel', serif; color:#fff;
-  font-size:1.1em; text-align:center;
-  text-decoration:none;
-  transition:transform 0.3s, background 0.3s, box-shadow 0.3s;
+  flex: 0 0 180px;
+  background:#111;
+  border:1px solid #222;
+  border-radius:12px;
+  padding:15px 20px;
+  color:#fff;
+  text-align:center;
+  scroll-snap-align: center;
+  font-family:'Cinzel', serif;
+  font-size:1.1em;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
 }
 .card:hover {
   transform:scale(1.05);
@@ -76,12 +84,23 @@ img.profile:hover { transform:scale(1.05); }
 
 .feed-card {
   font-family:'Orbitron', sans-serif;
-  letter-spacing:1px;
   font-weight:700;
+  letter-spacing:1px;
   background:#222;
   animation:pulse 2s infinite alternate;
 }
 @keyframes pulse { 0%{box-shadow:0 0 8px #fff;} 100%{box-shadow:0 0 20px #fff;} }
+
+/* Scrollbar GIF overlay */
+#scroll-gif {
+  position:absolute;
+  bottom:0;
+  width:60px;
+  height:60px;
+  pointer-events:none;
+  transform: translateX(0);
+  transition: transform 0.05s linear;
+}
 
 /* Interactive guy */
 .character { position:absolute; cursor:pointer; z-index:2; width:80px; }
@@ -95,23 +114,28 @@ img.profile:hover { transform:scale(1.05); }
   .card { width:120px; font-size:0.95em; padding:12px 15px; }
   img.profile { width:35vw; height:35vw; }
   #quote-display { font-size:0.9em; }
+  #scroll-gif { width:40px; height:40px; }
 }
 </style>
 </head>
 <body>
 
-<!-- Profile / Audio Trigger -->
+<!-- Profile GIF -->
 <img src="assets/images/profile-static.png" alt="Teejys" class="profile" id="profile">
 
-<!-- Card carousel -->
-<div class="card-carousel-container">
-  <a href="https://discord.gg/gwCuT2SeFk" target="_blank" class="card">Discord</a>
-  <a href="https://teejys.substack.com" target="_blank" class="card">Diary / Substack</a>
-  <a href="https://learningstages.bandcamp.com" target="_blank" class="card">Bandcamp</a>
-  <a href="https://www.youtube.com/@teejys" target="_blank" class="card">YouTube</a>
-  <a href="https://www.instagram.com/teejys" target="_blank" class="card">Instagram</a>
-  <a href="https://www.tiktok.com/@teejys" target="_blank" class="card">TikTok</a>
-  <a href="https://cash.app/$teejyscash" target="_blank" class="card feed-card">Feed the Abyss — $teejyscash</a>
+<!-- Carousel viewport -->
+<div class="card-carousel-viewport">
+  <div class="card-carousel-inner" id="carousel">
+    <a href="#" class="card">Discord</a>
+    <a href="#" class="card">Substack</a>
+    <a href="#" class="card">Bandcamp</a>
+    <a href="#" class="card">YouTube</a>
+    <a href="#" class="card">Instagram</a>
+    <a href="#" class="card">TikTok</a>
+    <a href="#" class="card feed-card">Feed the Abyss</a>
+  </div>
+  <!-- Scroll GIF overlay -->
+  <img src="assets/images/sad.png" id="scroll-gif">
 </div>
 
 <!-- Interactive guy -->
@@ -128,7 +152,7 @@ img.profile:hover { transform:scale(1.05); }
 <p class="email">fedintotheabyss@gmail.com</p>
 
 <script>
-/* Profile GIF click */
+// Profile GIF toggle
 const profile = document.getElementById('profile');
 const audio = document.getElementById('background-audio');
 let playing = false;
@@ -144,21 +168,10 @@ profile.addEventListener('click', () => {
   }
 });
 
-/* Card carousel tick sound */
-const wheel = document.querySelector('.card-carousel-container');
-const tick = document.getElementById('tick-sound');
-wheel.addEventListener('wheel', (e) => {
-  tick.currentTime=0;
-  tick.play().catch(()=>{});
-});
-
-/* Interactive guy */
+// Interactive guy
 const guy = document.getElementById('guy');
 const quoteDisplay = document.getElementById('quote-display');
-const guyImages = [
-  "assets/images/guy2.png",
-  "assets/images/guy3.png"
-];
+const guyImages = ["assets/images/guy2.png","assets/images/guy3.png"];
 let flipInterval;
 
 guy.addEventListener('click', () => {
@@ -181,6 +194,28 @@ guy.addEventListener('click', () => {
     guy.src=guyImages[0];
     quoteDisplay.style.opacity=0;
   },3000);
+});
+
+// Scrollbar GIF
+const carousel = document.getElementById('carousel');
+const scrollGif = document.getElementById('scroll-gif');
+let scrollTimeout;
+
+carousel.addEventListener('scroll', () => {
+  // Animate GIF while scrolling
+  scrollGif.src = 'assets/images/sad.gif';
+
+  // Move GIF along carousel
+  const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+  const scrollPercent = carousel.scrollLeft / maxScroll;
+  const maxX = carousel.clientWidth - scrollGif.clientWidth;
+  scrollGif.style.transform = `translateX(${scrollPercent * maxX}px)`;
+
+  // Stop after 500ms idle
+  clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(()=>{
+    scrollGif.src = 'assets/images/sad.png'; // static frame
+  },500);
 });
 </script>
 
