@@ -1,155 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pinch me, for I am awake.</title>
-  <link rel="icon" type="image/png" href="assets/images/profile-static.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pinch me, for I am awake.</title>
+<link rel="icon" type="image/png" href="assets/images/profile-static.png">
 
-  <!-- Google Font for Feed the Abyss -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<!-- Google Fonts for Gravestone / Gothic Vibe -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
-  <style>
-    * { box-sizing: border-box; margin:0; padding:0; }
-    html, body {
-      height: 100%;
-      width: 100%;
-      background: #000;
-      color: #fff;
-      font-family: 'Courier New', monospace;
-      scroll-behavior: smooth;
-    }
+<style>
+html, body {
+  margin:0; padding:0;
+  width:100%; height:100%;
+  background:#000; color:#fff;
+  font-family:'Cinzel', serif;
+  overflow-x:hidden;
+}
 
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 40px 20px;
-    }
+/* Profile / Audio Trigger */
+img.profile {
+  width:180px; height:180px;
+  max-width:40vw; max-height:40vw;
+  border-radius:50%;
+  cursor:pointer;
+  transition: transform 0.5s;
+  margin-bottom:20px;
+}
+img.profile:hover { transform:scale(1.05); }
 
-    /* Profile / Audio Trigger */
-    img.profile {
-      width: 180px;
-      height: 180px;
-      max-width: 40vw;
-      max-height: 40vw;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: transform 0.5s ease;
-      margin-bottom: 20px;
-    }
-    img.profile:hover {
-      transform: scale(1.05);
-    }
+/* Quotes */
+p.quote { font-style:italic; font-size:1.5em; margin-bottom:5px; text-align:center;}
+p.subquote { font-size:0.9em; opacity:0.8; margin-bottom:40px; text-align:center; }
 
-    /* Quotes */
-    p.quote {
-      font-style: italic;
-      font-size: 1.5em;
-      margin-bottom: 5px;
-    }
-    p.subquote {
-      font-size: 0.9em;
-      opacity: 0.8;
-      margin-bottom: 40px;
-    }
+/* Card carousel */
+.card-carousel {
+  display:flex; flex-direction:column; gap:20px;
+  height: 260px; /* 3 cards visible + gaps */
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  padding-right:5px;
+  margin-bottom:40px;
+}
+.card-carousel::-webkit-scrollbar { width:6px; }
+.card-carousel::-webkit-scrollbar-thumb { background:#555; border-radius:3px; }
 
-    /* Vertical Cards */
-    .card-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      width: 100%;
-      max-width: 400px;
-    }
+.card {
+  display:flex; justify-content:center; align-items:center;
+  background:#111; border:1px solid #222; border-radius:12px;
+  padding:15px 20px; font-family:'Cinzel', serif; color:#fff;
+  font-size:1.1em; text-align:center;
+  text-decoration:none;
+  transition:transform 0.3s, background 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  transform:scale(1.05);
+  background:#222;
+  box-shadow:0 0 15px #555;
+}
 
-    .card {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      background-color: #111;
-      border: 1px solid #222;
-      border-radius: 12px;
-      padding: 15px 20px;
-      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-      text-decoration: none;
-      color: #fff;
-      font-size: 1.1em;
-      text-align: center;
-    }
-    .card:hover {
-      transform: scale(1.05);
-      background-color: #222;
-      box-shadow: 0 0 15px #555;
-    }
+.feed-card {
+  font-family:'Orbitron', sans-serif;
+  letter-spacing:1px;
+  font-weight:700;
+  background:#222;
+  animation:pulse 2s infinite alternate;
+}
+@keyframes pulse { 0%{box-shadow:0 0 8px #fff;} 100%{box-shadow:0 0 20px #fff;} }
 
-    /* Feed the Abyss Special */
-    .feed-card {
-      font-family: 'Orbitron', sans-serif;
-      letter-spacing: 1px;
-      font-weight: 700;
-      background-color: #222;
-      animation: pulse 2s infinite alternate;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 8px #fff; }
-      100% { box-shadow: 0 0 20px #fff; }
-    }
+/* Characters */
+.character { position:absolute; cursor:pointer; z-index:2; }
+.overlay-gif { pointer-events:none; z-index:3; position:absolute; }
 
-    /* Responsive */
-    @media(max-width: 420px){
-      .card { font-size: 0.95em; padding: 12px 15px; }
-      img.profile { width: 35vw; height: 35vw; }
-      p.quote { font-size: 1.2em; }
-      p.subquote { font-size: 0.8em; }
-    }
+/* Quote over shoulder */
+#quote-display { position:absolute; color:#fff; font-family:'Cinzel', serif; font-size:1em; opacity:0; transition:opacity 0.5s; }
 
-  </style>
+/* Email */
+.email { margin-top:60px; font-size:0.9em; opacity:0.7; text-align:center; }
+
+/* Responsive */
+@media(max-width:420px){
+  .card { font-size:0.95em; padding:12px 15px; }
+  img.profile { width:35vw; height:35vw; }
+  p.quote { font-size:1.2em; }
+  p.subquote { font-size:0.8em; }
+}
+</style>
 </head>
 <body>
 
-  <!-- Profile / Audio Trigger -->
-  <img src="assets/images/profile-static.png" alt="Teejys" class="profile" id="profile">
+<!-- Profile / Audio Trigger -->
+<img src="assets/images/profile-static.png" alt="Teejys" class="profile" id="profile">
 
-  <!-- Quotes -->
-  <p class="quote">"The sun loves you, and I love you too!"</p>
-  <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
+<p class="quote">"The sun loves you, and I love you too!"</p>
+<p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
 
-  <!-- Vertical Cards -->
-  <div class="card-container">
-    <a href="https://discord.gg/gwCuT2SeFk" target="_blank" class="card">Discord</a>
-    <a href="https://teejys.substack.com" target="_blank" class="card">Diary / Substack → Subscribe & Read</a>
-    <a href="https://learningstages.bandcamp.com" target="_blank" class="card">Bandcamp</a>
-    <a href="https://www.youtube.com/@teejys" target="_blank" class="card">YouTube</a>
-    <a href="https://www.instagram.com/teejys" target="_blank" class="card">Instagram</a>
-    <a href="https://www.tiktok.com/@teejys" target="_blank" class="card">TikTok</a>
-    <a href="https://cash.app/$teejyscash" target="_blank" class="card feed-card">Feed the Abyss — $teejyscash</a>
-  </div>
+<!-- Card carousel -->
+<div class="card-carousel">
+  <a href="https://discord.gg/gwCuT2SeFk" target="_blank" class="card">Discord</a>
+  <a href="https://teejys.substack.com" target="_blank" class="card">Diary / Substack</a>
+  <a href="https://learningstages.bandcamp.com" target="_blank" class="card">Bandcamp</a>
+  <a href="https://www.youtube.com/@teejys" target="_blank" class="card">YouTube</a>
+  <a href="https://www.instagram.com/teejys" target="_blank" class="card">Instagram</a>
+  <a href="https://www.tiktok.com/@teejys" target="_blank" class="card">TikTok</a>
+  <a href="https://cash.app/$teejyscash" target="_blank" class="card feed-card">Feed the Abyss — $teejyscash</a>
+</div>
 
-  <!-- Background Audio -->
-  <audio id="background-audio" src="assets/audio/jan-4-drums-3.wav" loop></audio>
+<!-- Interactive guy -->
+<img src="assets/images/guy2.png" id="guy" class="character" style="top:150px; left:60px; width:80px;">
+<img src="assets/images/sad.gif" class="overlay-gif" style="top:150px; left:60px; width:80px;">
 
-  <script>
-    const profile = document.getElementById('profile');
-    const audio = document.getElementById('background-audio');
-    let playing = false;
+<div id="quote-display"></div>
 
-    profile.addEventListener('click', () => {
-      if(!playing){
-        profile.src = 'assets/images/profile.gif';
-        audio.play().catch(err => console.log('Audio play prevented:', err));
-        playing = true;
-      } else {
-        profile.src = 'assets/images/profile-static.png';
-        audio.pause();
-        audio.currentTime = 0;
-        playing = false;
-      }
-    });
-  </script>
+<!-- Background audio -->
+<audio id="background-audio" src="assets/audio/jan-4-drums-3.wav" loop></audio>
+<audio id="tick-sound" src="assets/audio/tick.mp3"></audio>
+
+<!-- Email -->
+<p class="email">fedintotheabyss@gmail.com</p>
+
+<script>
+/* Profile GIF click */
+const profile = document.getElementById('profile');
+const audio = document.getElementById('background-audio');
+let playing = false;
+profile.addEventListener('click', () => {
+  if(!playing){
+    profile.src='assets/images/profile.gif';
+    audio.play().catch(()=>{});
+    playing=true;
+  } else {
+    profile.src='assets/images/profile-static.png';
+    audio.pause(); audio.currentTime=0;
+    playing=false;
+  }
+});
+
+/* Card carousel tick sound */
+const wheel = document.querySelector('.card-carousel');
+const tick = document.getElementById('tick-sound');
+wheel.addEventListener('wheel', (e) => {
+  tick.currentTime=0;
+  tick.play().catch(()=>{});
+});
+
+/* Interactive guy */
+const guy = document.getElementById('guy');
+const quoteDisplay = document.getElementById('quote-display');
+const guyImages = [
+  "assets/images/guy2.png",
+  "assets/images/guy3.png"
+];
+let flipInterval;
+
+guy.addEventListener('click', () => {
+  const text = "yeet";
+  const rect = guy.getBoundingClientRect();
+  quoteDisplay.style.left = (rect.left - 10) + "px";
+  quoteDisplay.style.top = (rect.top + 20) + "px";
+  quoteDisplay.textContent = text;
+  quoteDisplay.style.opacity = 1;
+
+  let index=0;
+  clearInterval(flipInterval);
+  flipInterval = setInterval(()=>{
+    index=(index+1)%guyImages.length;
+    guy.src = guyImages[index];
+  },300);
+
+  setTimeout(()=>{
+    clearInterval(flipInterval);
+    guy.src=guyImages[0];
+    quoteDisplay.style.opacity=0;
+  },3000);
+});
+</script>
 
 </body>
 </html>
