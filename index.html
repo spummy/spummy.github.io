@@ -17,13 +17,26 @@ html, body {
   font-family:'Cinzel', serif;
 }
 
+/* Profile at top */
+img.profile {
+  width:150px;
+  height:150px;
+  display:block;
+  margin:20px auto;
+  border-radius:50%;
+  cursor:pointer;
+  transition: transform 0.5s;
+}
+img.profile:hover { transform: scale(1.05); }
+
+/* Vertical card list */
 .card-list {
   display:flex;
   flex-direction:column;
   gap:15px;
   width:90%;
   max-width:400px;
-  margin:50px auto;
+  margin:20px auto 120px auto; /* leave space for guy at bottom */
 }
 
 .card {
@@ -50,7 +63,7 @@ html, body {
 }
 @keyframes pulse { 0%{box-shadow:0 0 8px #fff;} 100%{box-shadow:0 0 20px #fff;} }
 
-/* Interactive guy fixed at bottom */
+/* Interactive guy at bottom */
 .character-container {
   position: fixed;
   bottom: 20px;
@@ -58,28 +71,36 @@ html, body {
   transform: translateX(-50%);
   cursor:pointer;
   z-index:2;
+  width:80px;
+  height:80px;
 }
 .character-container img {
-  width:80px;
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
 }
 
-/* Quote over shoulder */
+/* Quote over guy */
 #quote-display {
   position: fixed;
-  bottom:110px; /* above the guy */
+  bottom:110px; /* above guy */
   left:50%;
   transform: translateX(-50%);
   color:#fff;
   font-family:'Cinzel', serif;
   font-size:1em;
   opacity:0;
-  transition:opacity 0.3s;
+  transition: opacity 0.3s;
 }
 </style>
 </head>
 <body>
 
-<!-- Vertical list of cards -->
+<!-- Profile -->
+<img src="assets/images/profile-static.png" alt="Teejys" class="profile" id="profile">
+
+<!-- Vertical cards -->
 <div class="card-list">
   <a href="#" class="card">Discord</a>
   <a href="#" class="card">Substack</a>
@@ -90,35 +111,46 @@ html, body {
   <a href="#" class="card feed-card">Feed the Abyss</a>
 </div>
 
-<!-- Interactive guy -->
+<!-- Interactive guy with overlay GIF -->
 <div class="character-container" id="guy-container">
   <img src="assets/images/guy2.png" id="guy">
-  <img src="assets/images/sad.gif" style="position:absolute; top:0; left:0; width:80px; pointer-events:none;">
+  <img src="assets/images/sad.gif" id="guy-overlay">
 </div>
 
+<!-- Quote -->
 <div id="quote-display">yeet</div>
 
 <script>
+// Profile click toggle
+const profile = document.getElementById('profile');
+profile.addEventListener('click', ()=>{
+  if(profile.src.includes('static')){
+    profile.src='assets/images/profile.gif';
+  } else {
+    profile.src='assets/images/profile-static.png';
+  }
+});
+
+// Interactive guy click
 const guy = document.getElementById('guy');
-const quoteDisplay = document.getElementById('quote-display');
-const guyImages = ["assets/images/guy2.png","assets/images/guy3.png"];
-let flipInterval;
+const overlay = document.getElementById('guy-overlay');
+const quote = document.getElementById('quote-display');
+const images = ["assets/images/guy2.png","assets/images/guy3.png"];
+let interval;
 
-guy.addEventListener('click', () => {
-  const text = "yeet";
-  quoteDisplay.style.opacity = 1;
-
-  let index=0;
-  clearInterval(flipInterval);
-  flipInterval = setInterval(()=>{
-    index=(index+1)%guyImages.length;
-    guy.src = guyImages[index];
+guy.addEventListener('click', ()=>{
+  quote.style.opacity=1;
+  let i=0;
+  clearInterval(interval);
+  interval=setInterval(()=>{
+    i=(i+1)%images.length;
+    guy.src = images[i];
   },300);
 
   setTimeout(()=>{
-    clearInterval(flipInterval);
-    guy.src=guyImages[0];
-    quoteDisplay.style.opacity=0;
+    clearInterval(interval);
+    guy.src=images[0];
+    quote.style.opacity=0;
   },3000);
 });
 </script>
