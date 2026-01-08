@@ -86,23 +86,8 @@
 
   <!-- CashApp -->
   <a href="https://cash.app/$teejyscash" target="_blank">
-@ -97,17 +98,19 @@
-    profile.addEventListener('click', () => {
-      if (!isPlaying) {
-        profile.src = 'assets/images/profile.gif';
-        backgroundAudio.play();
-        backgroundAudio.play().catch(err => {
-          console.log('Audio play prevented:', err);
-        });
-        isPlaying = true;
-      } else {
-        profile.src = 'assets/images/profile-static.png';
-        backgroundAudio.pause();
-        backgroundAudio.currentTime = 0;
-        isPlaying = false;
-      }
-    });
   </script>
 
 </body>
 </html>
+a
