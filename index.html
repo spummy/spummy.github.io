@@ -4,153 +4,161 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>pinch me, for I am awake.</title>
-<link rel="icon" type="image/png" href="assets/images/profile-static.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="profile-static.png">
 
 <style>
-html, body {
-  margin:0;
-  padding:0;
-  background:#000;
-  color:#fff;
-  font-family:'Cinzel', serif;
-}
+  * {
+    box-sizing: border-box;
+  }
 
-/* Profile */
-.profile {
-  width:150px;
-  height:150px;
-  display:block;
-  margin:20px auto;
-  border-radius:50%;
-  cursor:pointer;
-}
+  body {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
 
-/* Card list */
-.card-list {
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-  width:90%;
-  max-width:400px;
-  margin:20px auto 180px;
-}
+  img.profile {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 30px;
+    cursor: pointer;
+  }
 
-/* IMPORTANT: display:block */
-.card {
-  display:block;
-  text-decoration:none;
-  background:#111;
-  border:1px solid #222;
-  border-radius:12px;
-  padding:16px;
-  text-align:center;
-  color:#fff;
-  font-size:1.1em;
-  transition:transform .2s, background .2s;
-}
+  p.quote {
+    font-style: italic;
+    font-size: 1.5em;
+    margin: 0;
+  }
 
-.card:hover {
-  transform:scale(1.04);
-  background:#222;
-}
+  p.author {
+    font-size: 1em;
+    color: #ccc;
+    margin-bottom: 40px;
+  }
 
-.feed-card {
-  font-family:'Orbitron', sans-serif;
-  animation:pulse 2s infinite alternate;
-}
+  a.link {
+    display: block;              /* IMPORTANT */
+    margin: 10px 0;
+    padding: 12px 20px;
+    width: 200px;
+    max-width: 80%;
+    text-decoration: none;
+    color: #fff;
+    background-color: #222;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
 
-@keyframes pulse {
-  from { box-shadow:0 0 8px #fff; }
-  to   { box-shadow:0 0 20px #fff; }
-}
+  a.link:hover {
+    background-color: #555;
+  }
 
-/* Bottom character */
-.character-container {
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:100px;
-  height:100px;
-  z-index:5;
-}
+  .bandcamp {
+    margin-top: 30px;
+    font-size: 1em;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s;
+  }
 
-.character-container img {
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-}
+  .bandcamp:hover {
+    background-color: #fff;
+    color: #000;
+  }
 
-#overlay {
-  pointer-events:none;
-}
-
-/* Quote */
-#quote-display {
-  position:fixed;
-  bottom:130px;
-  left:50%;
-  transform:translateX(-50%);
-  opacity:0;
-  transition:opacity .3s;
-}
+  iframe.video-container {
+    width: 80%;
+    max-width: 800px;
+    height: 450px;
+    border: none;
+    margin-top: 20px;
+    display: none;
+  }
 </style>
 </head>
 
 <body>
 
-<img src="assets/images/profile-static.png" class="profile" id="profile">
+<!-- Profile Image -->
+<img src="profile-static.png" alt="Teejys" class="profile" id="profile">
 
-<div class="card-list">
-  <a href="https://discord.gg/YOURINVITE" target="_blank" class="card">Discord</a>
-  <a href="https://your-substack-url" target="_blank" class="card">Diary</a>
-  <a href="https://bandcamp.com" target="_blank" class="card">Bandcamp</a>
-  <a href="https://youtube.com" target="_blank" class="card">YouTube</a>
-  <a href="https://instagram.com" target="_blank" class="card">Instagram</a>
-  <a href="https://tiktok.com" target="_blank" class="card">TikTok</a>
-  <a href="/feed" class="card feed-card">Feed the Abyss</a>
+<!-- Halloween Audio -->
+<audio id="halloween-audio">
+  <source src="halloween-audio.mp3" type="audio/mpeg">
+</audio>
+
+<!-- YouTube Video -->
+<iframe
+  id="youtube-video"
+  class="video-container"
+  src="https://www.youtube.com/embed/AadRc80Kjmw?autoplay=1"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
+
+<!-- Quote & Author -->
+<div id="content" style="margin-bottom: 40px;">
+  <p class="quote">"The sun loves you, and I love you too!"</p>
+  <p style="font-size: 0.9em; opacity: 0.8; margin-top: 4px;">
+    ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ
+  </p>
+  <p class="author">
+    teejys,
+    <a href="https://learningstages.bandcamp.com/track/bruises-single"
+       target="_blank"
+       rel="noopener">
+      bruises
+    </a>
+  </p>
 </div>
 
-<div class="character-container">
-  <img src="assets/images/guy2.png" id="guy">
-  <img src="assets/images/sad.gif" id="overlay">
+<!-- Social Media Links -->
+<div id="socials">
+  <a class="link" href="https://www.youtube.com/@teejys" target="_blank" rel="noopener">YouTube</a>
+  <a class="link" href="https://www.instagram.com/teejys" target="_blank" rel="noopener">Instagram</a>
+  <a class="link" href="https://www.tiktok.com/@teejys" target="_blank" rel="noopener">TikTok</a>
+  <a class="link" href="https://learningstages.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
 </div>
 
-<div id="quote-display">yeet</div>
+<!-- Contact -->
+<a class="bandcamp" href="mailto:sup@teejys.com">Email</a>
 
 <script>
 const profile = document.getElementById('profile');
-profile.onclick = () => {
-  profile.src = profile.src.includes('static')
-    ? 'assets/images/profile.gif'
-    : 'assets/images/profile-static.png';
-};
+const audio = document.getElementById('halloween-audio');
+const video = document.getElementById('youtube-video');
+const content = document.getElementById('content');
+const socials = document.getElementById('socials');
+const email = document.querySelector('.bandcamp');
 
-const guy = document.getElementById('guy');
-const quote = document.getElementById('quote-display');
-const frames = ['assets/images/guy2.png','assets/images/guy3.png'];
-let timer;
+let clicked = false;
 
-guy.onclick = () => {
-  quote.style.opacity = 1;
-  let i = 0;
-  clearInterval(timer);
-  timer = setInterval(() => {
-    i = (i + 1) % frames.length;
-    guy.src = frames[i];
-  }, 300);
+profile.addEventListener('click', () => {
+  if (clicked) return;
+  clicked = true;
 
-  setTimeout(() => {
-    clearInterval(timer);
-    guy.src = frames[0];
-    quote.style.opacity = 0;
-  }, 3000);
-};
+  profile.src = 'profile 1 scary.gif';
+
+  content.style.display = 'none';
+  socials.style.display = 'none';
+  email.style.display = 'none';
+
+  audio.play();
+});
+
+audio.addEventListener('ended', () => {
+  video.style.display = 'block';
+});
 </script>
 
 </body>
