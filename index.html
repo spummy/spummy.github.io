@@ -36,7 +36,7 @@ img.profile:hover { transform: scale(1.05); }
   gap:15px;
   width:90%;
   max-width:400px;
-  margin:20px auto 120px auto; /* leave space for guy at bottom */
+  margin:20px auto 160px auto; /* leave space for guy at bottom */
 }
 
 .card {
@@ -66,25 +66,31 @@ img.profile:hover { transform: scale(1.05); }
 /* Interactive guy at bottom */
 .character-container {
   position: fixed;
-  bottom: 20px;
-  left:50%;
+  bottom: 20px;       /* distance from bottom */
+  left: 50%;
   transform: translateX(-50%);
-  cursor:pointer;
-  z-index:2;
-  width:80px;
-  height:80px;
-}
-.character-container img {
-  width:100%;
-  position:absolute;
-  top:0;
-  left:0;
+  width: 100px;       /* set explicit width */
+  height: 100px;      /* set explicit height */
+  cursor: pointer;
+  z-index: 2;
 }
 
-/* Quote over guy */
+/* stack guy and overlay perfectly */
+.character-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+#guy { pointer-events:auto; }        /* base guy clickable */
+#overlay { pointer-events:none; }    /* overlay just visual */
+
+/* Quote above guy */
 #quote-display {
   position: fixed;
-  bottom:110px; /* above guy */
+  bottom: 130px; /* slightly above guy */
   left:50%;
   transform: translateX(-50%);
   color:#fff;
@@ -114,7 +120,7 @@ img.profile:hover { transform: scale(1.05); }
 <!-- Interactive guy with overlay GIF -->
 <div class="character-container" id="guy-container">
   <img src="assets/images/guy2.png" id="guy">
-  <img src="assets/images/sad.gif" id="guy-overlay">
+  <img src="assets/images/sad.gif" id="overlay">
 </div>
 
 <!-- Quote -->
@@ -133,25 +139,25 @@ profile.addEventListener('click', ()=>{
 
 // Interactive guy click
 const guy = document.getElementById('guy');
-const overlay = document.getElementById('guy-overlay');
+const overlay = document.getElementById('overlay');
 const quote = document.getElementById('quote-display');
 const images = ["assets/images/guy2.png","assets/images/guy3.png"];
 let interval;
 
 guy.addEventListener('click', ()=>{
-  quote.style.opacity=1;
-  let i=0;
+  quote.style.opacity = 1;
+  let i = 0;
   clearInterval(interval);
-  interval=setInterval(()=>{
-    i=(i+1)%images.length;
+  interval = setInterval(()=>{
+    i = (i+1) % images.length;
     guy.src = images[i];
-  },300);
+  }, 300);
 
   setTimeout(()=>{
     clearInterval(interval);
-    guy.src=images[0];
-    quote.style.opacity=0;
-  },3000);
+    guy.src = images[0];
+    quote.style.opacity = 0;
+  }, 3000);
 });
 </script>
 
