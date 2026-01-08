@@ -6,7 +6,6 @@
 <title>pinch me, for I am awake.</title>
 <link rel="icon" type="image/png" href="assets/images/profile-static.png">
 
-<!-- Google Fonts for Gravestone / Gothic Vibe -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
@@ -26,28 +25,43 @@ img.profile {
   border-radius:50%;
   cursor:pointer;
   transition: transform 0.5s;
-  margin-bottom:20px;
+  display:block;
+  margin: 20px auto 40px auto;
 }
 img.profile:hover { transform:scale(1.05); }
 
 /* Quotes */
-p.quote { font-style:italic; font-size:1.5em; margin-bottom:5px; text-align:center;}
-p.subquote { font-size:0.9em; opacity:0.8; margin-bottom:40px; text-align:center; }
-
-/* Card carousel */
-.card-carousel {
-  display:flex; flex-direction:column; gap:20px;
-  height: 260px; /* 3 cards visible + gaps */
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  padding-right:5px;
-  margin-bottom:40px;
+#quote-display { 
+  position:absolute; 
+  color:#fff; 
+  font-family:'Cinzel', serif; 
+  font-size:1em; 
+  opacity:0; 
+  transition:opacity 0.5s; 
+  white-space:nowrap;
 }
-.card-carousel::-webkit-scrollbar { width:6px; }
-.card-carousel::-webkit-scrollbar-thumb { background:#555; border-radius:3px; }
+
+/* Horizontal portal card carousel */
+.card-carousel-container {
+  width: 90%;
+  margin: 0 auto 40px auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  gap: 15px;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+.card-carousel-container::-webkit-scrollbar {
+  height:6px;
+}
+.card-carousel-container::-webkit-scrollbar-thumb {
+  background:#555; border-radius:3px;
+}
 
 .card {
-  display:flex; justify-content:center; align-items:center;
+  flex: 0 0 auto;
+  width: 180px;
   background:#111; border:1px solid #222; border-radius:12px;
   padding:15px 20px; font-family:'Cinzel', serif; color:#fff;
   font-size:1.1em; text-align:center;
@@ -69,22 +83,18 @@ p.subquote { font-size:0.9em; opacity:0.8; margin-bottom:40px; text-align:center
 }
 @keyframes pulse { 0%{box-shadow:0 0 8px #fff;} 100%{box-shadow:0 0 20px #fff;} }
 
-/* Characters */
-.character { position:absolute; cursor:pointer; z-index:2; }
-.overlay-gif { pointer-events:none; z-index:3; position:absolute; }
-
-/* Quote over shoulder */
-#quote-display { position:absolute; color:#fff; font-family:'Cinzel', serif; font-size:1em; opacity:0; transition:opacity 0.5s; }
+/* Interactive guy */
+.character { position:absolute; cursor:pointer; z-index:2; width:80px; }
+.overlay-gif { pointer-events:none; z-index:3; position:absolute; width:80px; }
 
 /* Email */
 .email { margin-top:60px; font-size:0.9em; opacity:0.7; text-align:center; }
 
 /* Responsive */
 @media(max-width:420px){
-  .card { font-size:0.95em; padding:12px 15px; }
+  .card { width:120px; font-size:0.95em; padding:12px 15px; }
   img.profile { width:35vw; height:35vw; }
-  p.quote { font-size:1.2em; }
-  p.subquote { font-size:0.8em; }
+  #quote-display { font-size:0.9em; }
 }
 </style>
 </head>
@@ -93,11 +103,8 @@ p.subquote { font-size:0.9em; opacity:0.8; margin-bottom:40px; text-align:center
 <!-- Profile / Audio Trigger -->
 <img src="assets/images/profile-static.png" alt="Teejys" class="profile" id="profile">
 
-<p class="quote">"The sun loves you, and I love you too!"</p>
-<p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
-
 <!-- Card carousel -->
-<div class="card-carousel">
+<div class="card-carousel-container">
   <a href="https://discord.gg/gwCuT2SeFk" target="_blank" class="card">Discord</a>
   <a href="https://teejys.substack.com" target="_blank" class="card">Diary / Substack</a>
   <a href="https://learningstages.bandcamp.com" target="_blank" class="card">Bandcamp</a>
@@ -108,8 +115,8 @@ p.subquote { font-size:0.9em; opacity:0.8; margin-bottom:40px; text-align:center
 </div>
 
 <!-- Interactive guy -->
-<img src="assets/images/guy2.png" id="guy" class="character" style="top:150px; left:60px; width:80px;">
-<img src="assets/images/sad.gif" class="overlay-gif" style="top:150px; left:60px; width:80px;">
+<img src="assets/images/guy2.png" id="guy" class="character" style="top:50%; left:50%; transform:translate(-50%,-50%);">
+<img src="assets/images/sad.gif" class="overlay-gif" style="top:50%; left:50%; transform:translate(-50%,-50%);">
 
 <div id="quote-display"></div>
 
@@ -138,7 +145,7 @@ profile.addEventListener('click', () => {
 });
 
 /* Card carousel tick sound */
-const wheel = document.querySelector('.card-carousel');
+const wheel = document.querySelector('.card-carousel-container');
 const tick = document.getElementById('tick-sound');
 wheel.addEventListener('wheel', (e) => {
   tick.currentTime=0;
@@ -157,8 +164,8 @@ let flipInterval;
 guy.addEventListener('click', () => {
   const text = "yeet";
   const rect = guy.getBoundingClientRect();
-  quoteDisplay.style.left = (rect.left - 10) + "px";
-  quoteDisplay.style.top = (rect.top + 20) + "px";
+  quoteDisplay.style.left = (rect.left + rect.width/2) + "px";
+  quoteDisplay.style.top = (rect.top - 20) + "px";
   quoteDisplay.textContent = text;
   quoteDisplay.style.opacity = 1;
 
