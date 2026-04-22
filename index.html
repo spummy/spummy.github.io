@@ -1,167 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>pinch me, for I am awake.</title>
-<link rel="icon" type="image/png" href="assets/images/profile-static.png">
-
-<style>
-  body {
-    margin: 0;
-    padding: 40px 20px;
-    font-family: "Courier New", monospace;
-    background: #000;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: filter 0.6s ease;
-  }
-
-  body[data-layer="surface"] { filter: brightness(1.05); }
-  body[data-layer="depth"]   { filter: brightness(0.75) contrast(1.2); }
-
-  .header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  img.profile {
-    width: 180px;
-    height: 180px;
-    cursor: pointer;
-  }
-
-  p.quote {
-    font-style: italic;
-    font-size: 1.3em;
-    margin: 10px 0 0;
-  }
-
-  p.subquote {
-    font-size: 0.85em;
-    opacity: 0.7;
-    margin-top: 5px;
-  }
-
-  .section {
-    margin-top: 40px;
-    width: min(420px, 90%);
-    text-align: center;
-  }
-
-  h2 {
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    opacity: 0.6;
-    margin-bottom: 10px;
-  }
-
-  a.link {
-    display: block;
-    margin: 8px 0;
-    padding: 12px;
-    background: #222;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-  }
-
-  a.link:hover { background: #444; }
-
-  .player {
-    width: 100%;
-    aspect-ratio: 16/9;
-    border: none;
-    border-radius: 8px;
-  }
-
-  /* SAD ICON */
-  .sad {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 120px;
-    height: auto;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    z-index: 5;
-  }
-
-  .sad:hover {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-</style>
-</head>
-
-<body data-layer="surface">
-
-<audio id="audio"></audio>
-
-<div class="header">
-  <img id="profile" class="profile" src="assets/images/profile-static.png">
-
-  <p class="quote">"The sun loves you, and I love you too!"</p>
-  <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
-</div>
-
-<!-- YOUTUBE -->
-<div class="section">
-  <h2>presence</h2>
-  <iframe id="ytplayer" class="player" allow="encrypted-media"></iframe>
-</div>
-
-<!-- CORE -->
-<div class="section">
-  <h2>core output</h2>
-  <a class="link" href="https://learningstages.bandcamp.com">bandcamp</a>
-  <a class="link" href="https://www.youtube.com/@teejys">youtube archive</a>
-  <a class="link" href="https://teejys.substack.com">blog</a>
-</div>
-
-<!-- R HOUSE -->
-<div class="section">
-  <h2>r. house productions</h2>
-  <a class="link" href="https://rhouseproductions.bandcamp.com/">bandcamp</a>
-  <a class="link" href="https://instagram.com/rhouseproductions">instagram</a>
-  <a class="link" href="https://facebook.com/revivalhousew00t">facebook</a>
-</div>
-
-<!-- ARCHIVE -->
-<div class="section">
-  <h2>memory archive</h2>
-  <a class="link" href="https://drive.google.com/drive/u/2/folders/1G_BrOgVCznKwdNB9xrISMrl0stYxOThN">teejys thangz</a>
-  <a class="link" href="https://drive.google.com/drive/folders/1ovDCz5IO30Km382JwqhS0sbloTezv5Dm">trombone sheets</a>
-</div>
-
-<!-- TROMBONE -->
-<div class="section">
-  <h2>trombone strata</h2>
-  <a class="link" href="https://www.youtube.com/watch?v=3FHizcHwMyc&list=PLxq5jYazg3369QDZvFlE5xGZLz9_qvnYC">practice logs</a>
-  <a class="link" href="https://www.youtube.com/watch?v=3FHizcHwMyc&list=PLxq5jYazg336qWALGy9gVdB54by86ar9_">livestream archive</a>
-</div>
-
-<!-- SOCIAL -->
-<div class="section">
-  <h2>surface</h2>
-  <a class="link" href="https://discord.gg/gwCuT2SeFk">discord</a>
-  <a class="link" href="https://www.instagram.com/teejys">instagram</a>
-  <a class="link" href="https://www.tiktok.com/@teejys">tiktok</a>
-</div>
-
-<!-- CONTACT -->
-<div class="section">
-  <h2>contact</h2>
-  <a class="link" href="mailto:sup@teejys.com">sup@teejys.com</a>
-</div>
-
-<!-- SAD ICON -->
-<img id="sad" class="sad" src="assets/images/sad.png">
-
-<!-- ENGINE -->
 <script>
 const videos = [
   "fHnBDu3BNCk",
@@ -175,47 +11,58 @@ const player = document.getElementById("ytplayer");
 
 let layer = "surface";
 
-/* LOAD VIDEO ONLY ON DEEP STATE */
+/* -----------------------
+   VIDEO LOADER (depth only)
+------------------------*/
 function loadVideo() {
   const pick = videos[Math.floor(Math.random() * videos.length)];
-  player.src =
-    "https://www.youtube.com/embed/" + pick +
-    "?rel=0";
+  player.src = "https://www.youtube.com/embed/" + pick + "?rel=0";
 }
 
-/* PROFILE = SAFE STATE ONLY */
+/* -----------------------
+   STATE RENDERER (KEY FIX)
+------------------------*/
+function renderState() {
+  document.body.setAttribute("data-layer", layer);
+
+  if (layer === "surface") {
+    profile.src = "assets/images/profile-static.png";
+    sad.src = "assets/images/sad.png";
+
+    audio.pause();
+    audio.src = "assets/audio/here we aint.wav";
+    audio.currentTime = 0;
+    audio.play();
+
+    player.src = ""; // stop video in surface
+  }
+
+  if (layer === "depth") {
+    profile.src = "assets/images/profile.gif";
+    sad.src = "assets/images/sad.gif";
+
+    audio.pause();
+    audio.src = "assets/audio/dream.wav";
+    audio.currentTime = 0;
+    audio.play();
+
+    loadVideo();
+  }
+}
+
+/* -----------------------
+   CONTROLS
+------------------------*/
 profile.onclick = () => {
   layer = "surface";
-  document.body.setAttribute("data-layer", layer);
-
-  profile.src = "assets/images/profile-static.png";
-  sad.src = "assets/images/sad.png";
-
-  audio.pause();
-  audio.src = "assets/audio/here we aint.wav";
-  audio.currentTime = 0;
-  audio.play();
+  renderState();
 };
 
-/* SAD ICON = DEEP STATE */
 sad.onclick = () => {
   layer = "depth";
-  document.body.setAttribute("data-layer", layer);
-
-  profile.src = "assets/images/profile.gif";
-  sad.src = "assets/images/sad.gif";
-
-  audio.pause();
-  audio.src = "assets/audio/dream.wav";
-  audio.currentTime = 0;
-  audio.play();
-
-  loadVideo();
+  renderState();
 };
 
-/* INITIAL STATE */
-document.body.setAttribute("data-layer", "surface");
+/* INIT */
+renderState();
 </script>
-
-</body>
-</html>
