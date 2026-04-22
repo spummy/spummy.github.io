@@ -94,15 +94,31 @@
   <p class="quote">"The sun loves you, and I love you too!"</p>
   <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
 
-  <div class="section">
-    <h2>listen</h2>
-    <iframe 
-      class="player"
-      src="https://www.youtube.com/embed/videoseries?list=PLxq5jYazg335a-9qFzT-kGiP5PwV43u1V"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  </div>
+<div class="section">
+  <h2>listen</h2>
+  <iframe id="ytplayer"
+    class="player"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<script>
+const playlist = "PLxq5jYazg335a-9qFzT-kGiP5PwV43u1V";
+
+// add a few known video IDs from your official audio playlist
+const videos = [
+  "fHnBDu3BNCk",
+  "DJ5xwgO-pCs"
+];
+
+// pick random starting point each visit
+const pick = videos[Math.floor(Math.random() * videos.length)];
+
+document.getElementById("ytplayer").src =
+  "https://www.youtube.com/embed/" + pick + "?list=" + playlist;
+</script>
 
   <div class="section">
     <h2>music</h2>
