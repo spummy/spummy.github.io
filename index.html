@@ -23,19 +23,26 @@
   body[data-layer="profile"] { filter: brightness(0.9) contrast(1.05); }
   body[data-layer="depth"] { filter: brightness(0.65) contrast(1.25); }
 
-  /* SIDEBAR */
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 100vh;
-    overflow-y: auto;
-    background: #050505;
-    border-right: 1px solid #111;
-    padding: 10px;
-    box-sizing: border-box;
-  }
+ .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100vh;
+  background: #050505;
+  border-right: 1px solid #111;
+  box-sizing: border-box;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar-gallery {
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 6px;
+}
 
   .sidebar h2 {
     text-align: center;
