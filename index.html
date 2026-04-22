@@ -79,13 +79,6 @@
     background: #444;
   }
 
-  .player {
-    width: 100%;
-    aspect-ratio: 16/9;
-    border: none;
-    border-radius: 8px;
-  }
-
   /* SAD ICON */
   .sad {
     position: fixed;
@@ -110,17 +103,12 @@
 
 <audio id="audio"></audio>
 
+<!-- HEADER -->
 <div class="header">
   <img id="profile" class="profile" src="assets/images/profile-static.png">
 
   <p class="quote">"The sun loves you, and I love you too!"</p>
   <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
-</div>
-
-<!-- YOUTUBE -->
-<div class="section">
-  <h2>presence</h2>
-  <iframe id="ytplayer" class="player" allow="encrypted-media"></iframe>
 </div>
 
 <!-- CORE -->
@@ -172,22 +160,11 @@
 
 <!-- ENGINE -->
 <script>
-const videos = [
-  "fHnBDu3BNCk",
-  "DJ5xwgO-pCs"
-];
-
 const audio = document.getElementById("audio");
 const profile = document.getElementById("profile");
 const sad = document.getElementById("sad");
-const player = document.getElementById("ytplayer");
 
 let active = null; // "profile" | "sad" | null
-
-function loadVideo() {
-  const pick = videos[Math.floor(Math.random() * videos.length)];
-  player.src = "https://www.youtube.com/embed/" + pick + "?rel=0";
-}
 
 /* PROFILE TOGGLE */
 profile.onclick = () => {
@@ -199,7 +176,7 @@ profile.onclick = () => {
 
     audio.pause();
     audio.src = "";
-    player.src = "";
+    audio.currentTime = 0;
 
     document.body.setAttribute("data-layer", "surface");
     return;
@@ -215,8 +192,6 @@ profile.onclick = () => {
   audio.currentTime = 0;
   audio.play();
 
-  player.src = "";
-
   document.body.setAttribute("data-layer", "surface");
 };
 
@@ -231,7 +206,7 @@ sad.onclick = () => {
 
     audio.pause();
     audio.src = "";
-    player.src = "";
+    audio.currentTime = 0;
 
     document.body.setAttribute("data-layer", "surface");
     return;
@@ -246,8 +221,6 @@ sad.onclick = () => {
   audio.src = "assets/audio/dream.wav";
   audio.currentTime = 0;
   audio.play();
-
-  loadVideo();
 
   document.body.setAttribute("data-layer", "depth");
 };
