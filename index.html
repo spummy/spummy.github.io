@@ -79,16 +79,11 @@
       background-color: #666;
     }
 
-    .substack-container {
-      width: min(400px, 90%);
-    }
-
-    iframe {
-      width: 100%;
-      height: 180px;
-      border: 1px solid #333;
-      background: white;
+    .player {
+      width: min(420px, 90%);
+      aspect-ratio: 16 / 9;
       border-radius: 8px;
+      border: none;
     }
   </style>
 </head>
@@ -100,21 +95,20 @@
   <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
 
   <div class="section">
-    <h2>substack</h2>
-    <div class="substack-container">
-      <iframe 
-        src="https://teejys.substack.com/embed" 
-        frameborder="0" 
-        scrolling="no">
-      </iframe>
-    </div>
+    <h2>listen</h2>
+    <iframe 
+      class="player"
+      src="https://www.youtube.com/embed/videoseries?list=PLxq5jYazg335a-9qFzT-kGiP5PwV43u1V"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
   </div>
 
   <div class="section">
     <h2>music</h2>
-    <a class="link featured" href="https://www.youtube.com/watch?v=fHnBDu3BNCk&list=PLxq5jYazg335a-9qFzT-kGiP5PwV43u1V&pp=sAgC" target="_blank">official audios</a>
-    <a class="link" href="https://www.youtube.com/watch?v=DJ5xwgO-pCs&list=PLxq5jYazg336VgPEokD2RoYKzHxrqD51r&pp=sAgC" target="_blank">original songs + performances</a>
+    <a class="link featured" href="https://www.youtube.com/watch?v=DJ5xwgO-pCs&list=PLxq5jYazg336VgPEokD2RoYKzHxrqD51r&pp=sAgC" target="_blank">original songs + performances</a>
     <a class="link" href="https://learningstages.bandcamp.com" target="_blank">bandcamp</a>
+    <a class="link" href="https://teejys.substack.com" target="_blank">blog</a>
   </div>
 
   <div class="section">
