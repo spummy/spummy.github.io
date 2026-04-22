@@ -1,280 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pinch me, for I am awake.</title>
-  <link rel="icon" type="image/png" href="assets/images/profile-static.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pinch me, for I am awake.</title>
+<link rel="icon" type="image/png" href="assets/images/profile-static.png">
 
-  <style>
-    body {
-      margin: 0;
-      padding: 40px 20px;
-      font-family: 'Courier New', monospace;
-      background-color: #000;
-      color: #fff;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: filter 0.6s ease, opacity 0.6s ease;
-    }
+<style>
+  body {
+    margin: 0;
+    padding: 40px 20px;
+    font-family: "Courier New", monospace;
+    background: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: filter 0.6s ease;
+  }
 
-    body.focus-sad {
-      filter: brightness(0.6) contrast(1.1);
-    }
+  body[data-layer="surface"] { filter: brightness(1.05); }
+  body[data-layer="depth"]   { filter: brightness(0.75) contrast(1.2); }
 
-    body.focus-profile {
-      filter: brightness(1.1);
-    }
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
-    img.profile {
-      width: 180px;
-      height: 180px;
-      margin-bottom: 25px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      z-index: 2;
-      position: relative;
-    }
+  img.profile {
+    width: 180px;
+    height: 180px;
+    cursor: pointer;
+  }
 
-    img.profile:hover {
-      transform: scale(1.03);
-    }
+  p.quote {
+    font-style: italic;
+    font-size: 1.3em;
+    margin: 10px 0 0;
+  }
 
-    p.quote {
-      font-style: italic;
-      font-size: 1.4em;
-      margin: 0;
-    }
+  p.subquote {
+    font-size: 0.85em;
+    opacity: 0.7;
+    margin-top: 5px;
+  }
 
-    p.subquote {
-      font-size: 0.9em;
-      opacity: 0.75;
-      margin-top: 5px;
-      margin-bottom: 30px;
-    }
+  .section {
+    margin-top: 40px;
+    width: min(420px, 90%);
+    text-align: center;
+  }
 
-    .section {
-      margin-top: 35px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  h2 {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    opacity: 0.6;
+    margin-bottom: 10px;
+  }
 
-    h2 {
-      font-size: 1rem;
-      text-transform: lowercase;
-      letter-spacing: 2px;
-      opacity: 0.7;
-      margin-bottom: 12px;
-    }
+  a.link {
+    display: block;
+    margin: 8px 0;
+    padding: 12px;
+    background: #222;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+  }
 
-    a.link {
-      display: block;
-      width: min(320px, 85%);
-      margin: 8px auto;
-      padding: 12px 20px;
-      text-decoration: none;
-      color: #fff;
-      background-color: #222;
-      border-radius: 8px;
-      transition: background 0.3s ease;
-    }
+  a.link:hover { background: #444; }
 
-    a.link:hover {
-      background-color: #555;
-    }
+  .player {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+    border-radius: 8px;
+  }
 
-    a.link.featured {
-      background-color: #333;
-    }
+  /* FIXED SAD ICON */
+  .sad {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 120px;
+    height: auto;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 5;
+  }
 
-    a.link.featured:hover {
-      background-color: #666;
-    }
-
-    .player {
-      width: min(420px, 90%);
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
-      border: none;
-    }
-
-    /* SAD ICON (bottom right) */
-    .sad {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 90px;
-      height: 90px;
-      cursor: pointer;
-      opacity: 0.7;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      z-index: 5;
-    }
-
-    .sad:hover {
-      transform: scale(1.05);
-      opacity: 1;
-    }
-  </style>
+  .sad:hover {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+</style>
 </head>
 
-<body class="focus-profile">
+<body data-layer="surface">
 
-  <!-- AUDIO ENGINE -->
-  <audio id="bgm"></audio>
+<audio id="audio"></audio>
 
-  <!-- PROFILE -->
-  <img src="assets/images/profile-static.png"
-       alt="profile"
-       class="profile"
-       id="profile">
+<div class="header">
+  <img id="profile" class="profile" src="assets/images/profile-static.png">
 
   <p class="quote">"The sun loves you, and I love you too!"</p>
-  <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
+  <p class="subquote">a system of memory, not identity</p>
+</div>
 
-  <!-- SAD ICON -->
-  <img src="assets/images/sad.png"
-       class="sad"
-       id="sad">
+<!-- MEDIA -->
+<div class="section">
+  <h2>presence</h2>
+  <iframe id="ytplayer" class="player" allow="autoplay"></iframe>
+</div>
 
-  <!-- LISTEN -->
-  <div class="section">
-    <h2>listen</h2>
-    <iframe id="ytplayer"
-      class="player"
-      frameborder="0"
-      allow="autoplay; encrypted-media"
-      allowfullscreen>
-    </iframe>
-  </div>
+<!-- CORE -->
+<div class="section">
+  <h2>core output</h2>
+  <a class="link" href="https://learningstages.bandcamp.com">bandcamp</a>
+  <a class="link" href="https://www.youtube.com/@teejys">youtube archive</a>
+  <a class="link" href="https://teejys.substack.com">blog</a>
+</div>
 
-  <script>
-    // YOUTUBE RANDOM START
-    const playlistId = "PLxq5jYazg335a-9qFzT-kGiP5PwV43u1V";
-    const startIndex = Math.floor(Math.random() * 20);
+<!-- R HOUSE -->
+<div class="section">
+  <h2>r. house productions</h2>
+  <a class="link" href="https://rhouseproductions.bandcamp.com/">bandcamp</a>
+  <a class="link" href="https://instagram.com/rhouseproductions">instagram</a>
+  <a class="link" href="https://facebook.com/revivalhousew00t">facebook</a>
+</div>
 
-    document.getElementById("ytplayer").src =
-      "https://www.youtube.com/embed/videoseries?list=" +
-      playlistId +
-      "&index=" + startIndex;
+<!-- ARCHIVE -->
+<div class="section">
+  <h2>memory archive</h2>
+  <a class="link" href="https://drive.google.com/drive/u/2/folders/1G_BrOgVCznKwdNB9xrISMrl0stYxOThN">teejys thangz</a>
+  <a class="link" href="https://drive.google.com/drive/folders/1ovDCz5IO30Km382JwqhS0sbloTezv5Dm">trombone sheets</a>
+</div>
 
-    // AUDIO SETUP
-    const audio = document.getElementById("bgm");
+<!-- TROMBONE -->
+<div class="section">
+  <h2>trombone strata</h2>
+  <a class="link" href="https://www.youtube.com/watch?v=3FHizcHwMyc&list=PLxq5jYazg3369QDZvFlE5xGZLz9_qvnYC">practice logs</a>
+  <a class="link" href="https://www.youtube.com/watch?v=3FHizcHwMyc&list=PLxq5jYazg336qWALGy9gVdB54by86ar9_">livestream archive</a>
+</div>
 
-    const profile = document.getElementById("profile");
-    const sad = document.getElementById("sad");
+<!-- SOCIAL -->
+<div class="section">
+  <h2>surface</h2>
+  <a class="link" href="https://discord.gg/gwCuT2SeFk">discord</a>
+  <a class="link" href="https://www.instagram.com/teejys">instagram</a>
+  <a class="link" href="https://www.tiktok.com/@teejys">tiktok</a>
+</div>
 
-    let state = "profile";
+<!-- CONTACT -->
+<div class="section">
+  <h2>contact</h2>
+  <a class="link" href="mailto:sup@teejys.com">sup@teejys.com</a>
+</div>
 
-    function play(src) {
-      audio.pause();
-      audio.src = encodeURI(src);
-      audio.currentTime = 0;
-      audio.play();
-    }
+<!-- SAD ICON -->
+<img id="sad" class="sad" src="assets/images/sad.png">
 
-    // PROFILE CLICK → "here we aint"
-    profile.addEventListener("click", () => {
-      state = "profile";
+<!-- ENGINE -->
+<script>
+const videos = [
+  "fHnBDu3BNCk",
+  "DJ5xwgO-pCs"
+];
 
-      document.body.classList.remove("focus-sad");
-      document.body.classList.add("focus-profile");
+const audio = document.getElementById("audio");
+const profile = document.getElementById("profile");
+const sad = document.getElementById("sad");
+const player = document.getElementById("ytplayer");
 
-      profile.src = "assets/images/profile.gif";
-      sad.src = "assets/images/sad.png";
+let layer = "surface";
 
-      play("assets/audio/here we aint.wav");
-    });
+function setLayer(next) {
+  layer = next;
+  document.body.setAttribute("data-layer", layer);
 
-    // SAD CLICK → "dream"
-    sad.addEventListener("click", () => {
-      state = "sad";
+  const pick = videos[Math.floor(Math.random() * videos.length)];
 
-      document.body.classList.remove("focus-profile");
-      document.body.classList.add("focus-sad");
+  player.src =
+    "https://www.youtube.com/embed/" + pick +
+    "?autoplay=1&rel=0";
 
-      profile.src = "assets/images/profile-static.png";
-      sad.src = "assets/images/sad.gif";
+  if (layer === "surface") {
+    profile.src = "assets/images/profile-static.png";
+    sad.src = "assets/images/sad.png";
+    audio.src = "assets/audio/here we aint.wav";
+  }
 
-      play("assets/audio/dream.wav");
-    });
-  </script>
+  if (layer === "depth") {
+    profile.src = "assets/images/profile.gif";
+    sad.src = "assets/images/sad.gif";
+    audio.src = "assets/audio/dream.wav";
+  }
 
-  <!-- MUSIC -->
-  <div class="section">
-    <h2>music</h2>
-    <a class="link featured"
-       href="https://www.youtube.com/watch?v=DJ5xwgO-pCs&list=PLxq5jYazg336VgPEokD2RoYKzHxrqD51r"
-       target="_blank">
-      original songs + performances
-    </a>
-    <a class="link" href="https://learningstages.bandcamp.com" target="_blank">bandcamp</a>
-    <a class="link" href="https://teejys.substack.com" target="_blank">blog</a>
-  </div>
+  audio.currentTime = 0;
+  audio.play();
+}
 
-  <!-- R HOUSE -->
-  <div class="section">
-    <h2>r. house productions</h2>
-    <a class="link featured" href="https://rhouseproductions.bandcamp.com/" target="_blank">bandcamp</a>
-    <a class="link" href="https://instagram.com/rhouseproductions" target="_blank">instagram</a>
-    <a class="link" href="https://facebook.com/revivalhousew00t" target="_blank">facebook</a>
-  </div>
+profile.onclick = () => setLayer("surface");
+sad.onclick = () => setLayer("depth");
 
-  <!-- FREE DOWNLOADS -->
-  <div class="section">
-    <h2>free downloads</h2>
-    <a class="link featured"
-       href="https://drive.google.com/drive/u/2/folders/1G_BrOgVCznKwdNB9xrISMrl0stYxOThN"
-       target="_blank">
-      teejys thangz
-    </a>
-    <a class="link"
-       href="https://drive.google.com/drive/folders/1ovDCz5IO30Km382JwqhS0sbloTezv5Dm"
-       target="_blank">
-      trombone sheets
-    </a>
-  </div>
-
-  <!-- TROMBONE -->
-  <div class="section">
-    <h2>trombone</h2>
-    <a class="link featured"
-       href="https://www.youtube.com/watch?v=3FHizcHwMyc&list=PLxq5jYazg3369QDZvFlE5xGZLz9_qvnYC"
-       target="_blank">
-      practice logs
-    </a>
-    <a class="link"
-       href="https://www.youtube.com/watch?v=3FHizcHwMyc&list=PLxq5jYazg336qWALGy9gVdB54by86ar9_"
-       target="_blank">
-      livestream archive
-    </a>
-  </div>
-
-  <!-- SOCIALS -->
-  <div class="section">
-    <h2>socials</h2>
-    <a class="link" href="https://discord.gg/gwCuT2SeFk" target="_blank">discord</a>
-    <a class="link" href="https://www.youtube.com/@teejys" target="_blank">youtube</a>
-    <a class="link" href="https://www.instagram.com/teejys" target="_blank">instagram</a>
-    <a class="link" href="https://www.tiktok.com/@teejys" target="_blank">tiktok</a>
-    <a class="link" href="https://www.facebook.com/teejysfacebook" target="_blank">facebook</a>
-  </div>
-
-  <!-- CONTACT -->
-  <div class="section">
-    <h2>contact me</h2>
-    <a class="link" href="mailto:sup@teejys.com">sup@teejys.com</a>
-  </div>
-
-  <!-- SUPPORT -->
-  <div class="section">
-    <h2>support</h2>
-    <a class="link" href="https://cash.app/$teejyscash" target="_blank">cash app</a>
-  </div>
+setLayer("surface");
+</script>
 
 </body>
 </html>
