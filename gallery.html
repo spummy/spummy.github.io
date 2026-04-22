@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>photo archive</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 30px;
+    background: #000;
+    color: #fff;
+    font-family: "Courier New", monospace;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    font-weight: normal;
+  }
+
+  .back {
+    display: inline-block;
+    margin-bottom: 25px;
+    padding: 10px 14px;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+  }
+
+  .back:hover {
+    background: #222;
+  }
+
+  .gallery {
+    columns: 3 280px;
+    column-gap: 18px;
+  }
+
+  .item {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .item img {
+    width: 100%;
+    display: block;
+  }
+
+  .caption {
+    padding: 10px;
+    font-size: 0.85rem;
+    color: #bbb;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← back</a>
+
+<h1>photo archive</h1>
+
+<div class="gallery" id="gallery"></div>
+
+<script>
+const files = [
+"10-24-2023-passport-pic_55224122261_c.jpg",
+"2017-crunchy-rol_55224698479_l.jpg",
+"2017-got-my-first-hollow-body-emperor-ii---joe-pass_55224619573_l.jpg",
+"2017-iconic-phoneception_55224451391_l.jpg",
+"2017-my-heart_55224858105_l.jpg",
+"2017-trump-protests-portland-oregon_55224619558_l.jpg",
+"2019-dawning-cerulean-mv-shoot_55224858085_l.jpg",
+"2019-fell-asleep-winter-tour_55224619538_l.jpg",
+"2019-posing-1_55224619528_l.jpg",
+"2019-posing-2_55224619523_l.jpg",
+"2019-posing-3_55224698419_l.jpg",
+"2019-psu-halloween-show---october-2_55223549277_l.jpg",
+"2019-psu-halloween-show---october_55224619518_l.jpg",
+"2019-winter-tour-last-day_55224698404_l.jpg",
+"2020-basement-show-1_55224858045_l.jpg",
+"2020-basement-show-2_55224619503_l.jpg",
+"2020-covid-cosplay_55224698389_l.jpg",
+"2020-got-done-mixing-marmot-ep_55224452196_l.jpg",
+"2020-i-heard-you-like-ur-boiz-thicc_55224698384_l.jpg",
+"2021-aquatic-dancer_55224862800_l.jpg",
+"2021-atticus-photoshot-me-2_55224624233_l.jpg",
+"2021-atticus-photoshot-me-3_55224703364_l.jpg",
+"2021-atticus-photoshot-me-4_55224703354_l.jpg",
+"2021-atticus-photoshot-me-5_55224456276_l.jpg",
+"2021-atticus-photoshot-me_55224862795_l.jpg",
+"2021-my-heart_55224456271_l.jpg",
+"2021-shot-my-first-gun_55224703334_m.jpg",
+"2021-wakey-wakey_55224862775_l.jpg",
+"2022-drove-from-pdx-to-il-with-some-detours---texas-i-think_55224628998_l.jpg",
+"2022-thinkin-bout-the-starzzz-2_55224703344_l.jpg",
+"2022-thinkin-bout-the-starzzz_55224703339_l.jpg",
+"2022-turtle-motivation_55224708224_l.jpg",
+"2022-what-a-smart-and-good-boy-loox-like_55224867645_l.jpg",
+"2023-vanity-pic_55224628993_l.jpg",
+"2024---rorschach-blister---hardcore-bassage_55224708209_l.jpg",
+"2024-baby-my-phone_55223561887_l.jpg",
+"2024-costco-conspirator-much_55224631573_w.jpg",
+"2024-did-you-know-im-an-industry-plant_55224710879_l.jpg",
+"2024-down-we-go_55223562962_l.jpg",
+"2024-got-my-rari_55224708214_l.jpg",
+"2024-guess-which-one-is-my-costco-card-lol_55224460941_l.jpg",
+"2024-keep-holding_55223559137_l.jpg",
+"2024-metamorphosis-era_55224708194_l.jpg",
+"2024-phoneception_55224460936_l.jpg",
+"2024-so-stoked-to-be-here-fr_55224870475_l.jpg",
+"2024-the-courage-to-be-disliked_55224870495_l.jpg",
+"2024-the-other-side_55223561892_l.jpg",
+"2024-this-is-my-costco-card-haha_55224463946_l.jpg",
+"2024-useless-paper-bitch_55224464551_l.jpg",
+"2024-when-i-opened-the-door_55224710869_l.jpg",
+"2024-world-of-dogs_55224463951_l.jpg",
+"2024-you-may-hold-the-applause_55223559132_l.jpg",
+"2025-found-him_55224871880_l.jpg",
+"2025-where-were-you-when-the-sky-fell-black-1_55224712629_l.jpg",
+"2025-where-were-you-when-the-sky-fell-black-2_55224633358_l.jpg",
+"april-1st-2017---met-julian-lage-he-called-me-brother_55224698379_l.jpg",
+"coos-bay-december-10-2018_55223215602_l.jpg",
+"coos-bay-december-10-2018_55223215692_l.jpg",
+"coos-bay-december-10-2018_55224118096_l.jpg",
+"coos-bay-december-10-2018_55224283133_l.jpg",
+"coos-bay-december-10-2018_55224283138_l.jpg",
+"coos-bay-december-10-2018_55224283158_l.jpg"
+];
+
+const gallery = document.getElementById("gallery");
+
+files.forEach(file => {
+  const item = document.createElement("div");
+  item.className = "item";
+
+  const img = document.createElement("img");
+  img.src = `assets/gallery/${file}`;
+
+  const caption = document.createElement("div");
+  caption.className = "caption";
+  caption.textContent = file
+    .replace(/\.[^/.]+$/, "")
+    .replace(/_[^_]+$/, "")
+    .replace(/-/g, " ");
+
+  item.appendChild(img);
+  item.appendChild(caption);
+  gallery.appendChild(item);
+});
+</script>
+
+</body>
+</html>
