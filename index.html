@@ -175,49 +175,46 @@ const player = document.getElementById("ytplayer");
 
 let layer = "surface";
 
+/* LOAD VIDEO ONLY ON DEEP STATE */
 function loadVideo() {
   const pick = videos[Math.floor(Math.random() * videos.length)];
-
-  // NO autoplay (fixes your issue)
   player.src =
     "https://www.youtube.com/embed/" + pick +
     "?rel=0";
 }
 
-function setLayer(next) {
-  layer = next;
+/* PROFILE = SAFE STATE ONLY */
+profile.onclick = () => {
+  layer = "surface";
   document.body.setAttribute("data-layer", layer);
 
-  loadVideo();
+  profile.src = "assets/images/profile-static.png";
+  sad.src = "assets/images/sad.png";
 
-  if (layer === "surface") {
-    profile.src = "assets/images/profile-static.png";
-    sad.src = "assets/images/sad.png";
-    audio.src = "assets/audio/here we aint.wav";
-  }
+  audio.pause();
+  audio.src = "assets/audio/here we aint.wav";
+  audio.currentTime = 0;
+  audio.play();
+};
 
-  if (layer === "depth") {
-    profile.src = "assets/images/profile.gif";
-    sad.src = "assets/images/sad.gif";
-    audio.src = "assets/audio/dream.wav";
-  }
+/* SAD ICON = DEEP STATE */
+sad.onclick = () => {
+  layer = "depth";
+  document.body.setAttribute("data-layer", layer);
 
+  profile.src = "assets/images/profile.gif";
+  sad.src = "assets/images/sad.gif";
+
+  audio.pause();
+  audio.src = "assets/audio/dream.wav";
   audio.currentTime = 0;
   audio.play();
 
-  // force play attempt after embed loads
-  setTimeout(() => {
-    player.contentWindow?.postMessage(
-      '{"event":"command","func":"playVideo","args":""}',
-      "*"
-    );
-  }, 500);
-}
+  loadVideo();
+};
 
-profile.onclick = () => setLayer("surface");
-sad.onclick = () => setLayer("depth");
-
-setLayer("surface");
+/* INITIAL STATE */
+document.body.setAttribute("data-layer", "surface");
 </script>
 
 </body>
