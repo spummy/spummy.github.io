@@ -10,50 +10,31 @@
   body {
     margin: 0;
     padding: 40px 20px;
-    margin-left: 240px;
     font-family: "Courier New", monospace;
     background: #000;
     color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: filter 0.9s ease, background 0.9s ease;
+    transition: filter 0.9s ease, background 0.9s ease, opacity 0.9s ease;
   }
 
   body[data-layer="surface"] {
-    filter: brightness(1.05);
+    filter: brightness(1.05) contrast(1);
     background: #000;
+    opacity: 1;
   }
 
   body[data-layer="profile"] {
     filter: brightness(0.9) contrast(1.05);
     background: #020202;
+    opacity: 0.95;
   }
 
   body[data-layer="depth"] {
     filter: brightness(0.65) contrast(1.25);
     background: #050505;
-  }
-
-  /* SIDE FLICKR GALLERY */
-  .side-gallery {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 240px;
-    height: 100vh;
-    overflow-y: auto;
-    background: rgba(0,0,0,0.92);
-    border-right: 1px solid #222;
-    padding: 10px;
-  }
-
-  .side-gallery img {
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 6px;
     opacity: 0.9;
-    display: block;
   }
 
   .header {
@@ -106,26 +87,27 @@
     background: #444;
   }
 
+  /* SAD ICON */
   .sad {
     position: fixed;
     bottom: 20px;
     right: 20px;
     width: 120px;
+    height: auto;
     cursor: pointer;
     opacity: 0.8;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 5;
   }
 
   .sad:hover {
     transform: scale(1.1);
+    opacity: 1;
   }
 </style>
 </head>
 
 <body data-layer="surface">
-
-<!-- FLICKR SIDE GALLERY -->
-<div class="side-gallery" id="gallery"></div>
 
 <audio id="audio"></audio>
 
@@ -139,33 +121,37 @@
 
 <!-- CORE -->
 <div class="section">
-  <h2>Crust</h2>
+  <h2>GATES</h2>
   <a class="link" href="https://discord.gg/gwCuT2SeFk">discord</a>
   <a class="link" href="https://www.instagram.com/teejys">instagram</a>
   <a class="link" href="https://www.tiktok.com/@teejys">tiktok</a>
   <a class="link" href="https://learningstages.bandcamp.com">bandcamp</a>
+  <a class="link" href="https://www.youtube.com/@teejys">youtune</a>
+</div>
+
+
+<!-- ARCHIVE -->
+<div class="section">
+  <h2>THE ABYSS</h2>
+  <a class="link" href="https://www.youtube.com/watch?v=3FHizcHwMyc&list=PLxq5jYazg336qWALGy9gVdB54by86ar9_">livestream archive</a>
+  <a class="link" href="https://drive.google.com/drive/u/2/folders/1G_BrOgVCznKwdNB9xrISMrl0stYxOThN">Google Drive</a>
+  <a class="link" href="https://teejys.substack.com">blog</a>
+  <a class="link" href="https://www.youtube.com/watch?v=3FHizcHwMyc&list=PLxq5jYazg3369QDZvFlE5xGZLz9_qvnYC">practice logs</a>
+  <a class="link" href="https://drive.google.com/drive/folders/1ovDCz5IO30Km382JwqhS0sbloTezv5Dm">trombone sheets</a>
 </div>
 
 <!-- R HOUSE -->
 <div class="section">
-  <h2>r. house productions</h2>
+  <h2>R. HOUSE PRODUCTIONS</h2>
   <a class="link" href="https://rhouseproductions.bandcamp.com/">bandcamp</a>
   <a class="link" href="https://instagram.com/rhouseproductions">instagram</a>
   <a class="link" href="https://facebook.com/revivalhousew00t">facebook</a>
 </div>
 
-<!-- ARCHIVE -->
-<div class="section">
-  <h2>Mantle</h2>
-
-  <a class="link" href="bible.html">lyric bible v1</a>
-  <a class="link" href="https://teejys.substack.com">blog</a>
-  <a class="link" href="https://drive.google.com/drive/folders/1ovDCz5IO30Km382JwqhS0sbloTezv5Dm">trombone sheets</a>
-</div>
 
 <!-- CONTACT -->
 <div class="section">
-  <h2>contact</h2>
+  <h2>CONTACT</h2>
   <a class="link" href="mailto:sup@teejys.com">sup@teejys.com</a>
 </div>
 
@@ -175,7 +161,7 @@
   <a class="link" href="https://cash.app/$teejyscash">cash app</a>
 </div>
 
-<!-- SAD -->
+<!-- SAD ICON -->
 <img id="sad" class="sad" src="assets/images/sad.png">
 
 <!-- ENGINE -->
@@ -183,70 +169,69 @@
 const audio = document.getElementById("audio");
 const profile = document.getElementById("profile");
 const sad = document.getElementById("sad");
-const gallery = document.getElementById("gallery");
 
-let active = null;
+let active = null; // "profile" | "sad" | null
 
-/* FLICKR AUTO LOAD */
-const feedURL =
-  "https://www.flickr.com/services/feeds/photoset.gne?set=72177720333250616&format=json&nojsoncallback=1";
-
-fetch(feedURL)
-  .then(res => res.json())
-  .then(data => {
-    data.items.forEach(item => {
-      const img = document.createElement("img");
-      img.src = item.media.m.replace("_m.jpg", "_b.jpg");
-      gallery.appendChild(img);
-    });
-  });
-
-/* PROFILE */
+/* PROFILE TOGGLE */
 profile.onclick = () => {
+
   if (active === "profile") {
     active = null;
+
     profile.src = "assets/images/profile-static.png";
+
     audio.pause();
     audio.src = "";
+    audio.currentTime = 0;
+
     document.body.setAttribute("data-layer", "surface");
     return;
   }
 
   active = "profile";
+
   profile.src = "assets/images/profile.gif";
   sad.src = "assets/images/sad.png";
 
   audio.pause();
   audio.src = "assets/audio/here we aint.wav";
+  audio.currentTime = 0;
   audio.play();
 
   document.body.setAttribute("data-layer", "profile");
 };
 
-/* SAD */
+/* SAD TOGGLE */
 sad.onclick = () => {
+
   if (active === "sad") {
     active = null;
+
     profile.src = "assets/images/profile-static.png";
     sad.src = "assets/images/sad.png";
 
     audio.pause();
     audio.src = "";
+    audio.currentTime = 0;
+
     document.body.setAttribute("data-layer", "surface");
     return;
   }
 
   active = "sad";
+
   profile.src = "assets/images/profile-static.png";
   sad.src = "assets/images/sad.gif";
 
   audio.pause();
   audio.src = "assets/audio/dream.wav";
+  audio.currentTime = 0;
   audio.play();
 
   document.body.setAttribute("data-layer", "depth");
 };
 
+/* INIT */
 document.body.setAttribute("data-layer", "surface");
 </script>
 
