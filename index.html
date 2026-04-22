@@ -1,192 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>pinch me, for I am awake.</title>
-<link rel="icon" type="image/png" href="assets/images/profile-static.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pinch me, for I am awake.</title>
+    <link rel="icon" type="image/png" href="assets/images/profile-static.png">
+    <style>
+        :root {
+            --bg-color: #000;
+            --sidebar-bg: #050505;
+            --accent-color: #222;
+            --hover-color: #444;
+            --text-color: #fff;
+            --transition-speed: 0.8s;
+        }
 
-<style>
-  body {
-    margin: 0;
-    padding: 40px 20px 40px 240px;
-    font-family: "Courier New", monospace;
-    background: #000;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: filter 0.9s ease;
-  }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Courier New", monospace;
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: filter var(--transition-speed) ease;
+        }
 
-  body[data-layer="surface"] { filter: brightness(1.05); }
-  body[data-layer="profile"] { filter: brightness(0.9) contrast(1.05); }
-  body[data-layer="depth"] { filter: brightness(0.65) contrast(1.25); }
+        /* Mood States */
+        body[data-mood="profile"] { filter: brightness(1.1) contrast(1.1); }
+        body[data-mood="sad"] { filter: brightness(0.5) contrast(1.4) grayscale(0.5); }
+        body[data-mood="idle"] { filter: brightness(1) contrast(1); }
 
- .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 240px;
-  height: 100vh;
-  background: #050505;
-  border-right: 1px solid #111;
-  box-sizing: border-box;
-  padding: 10px;
+        /* Sidebar Gallery */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--sidebar-bg);
+            border-right: 1px solid #111;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
 
-  display: flex;
-  flex-direction: column;
-}
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            border-bottom: 1px solid #111;
+            opacity: 0.6;
+        }
 
-#sidebar-gallery {
-  overflow-y: auto;
-  flex: 1;
-  padding-right: 6px;
-}
+        #gallery {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: #333 transparent;
+        }
 
-  .sidebar h2 {
-    text-align: center;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    opacity: 0.7;
-    margin-bottom: 12px;
-  }
+        .gallery-item {
+            margin-bottom: 25px;
+            text-decoration: none;
+            display: block;
+        }
 
-  .sidebar img {
-    width: 100%;
-    display: block;
-    margin-bottom: 8px;
-    border-radius: 6px;
-    opacity: 0.85;
-    transition: 0.2s ease;
-  }
+        .gallery-item img {
+            width: 100%;
+            border-radius: 4px;
+            opacity: 0.6;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
 
-  .sidebar img:hover {
-    opacity: 1;
-    transform: scale(1.02);
-  }
+        .gallery-item:hover img {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
 
-  /* MAIN */
-  .header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+        .gallery-item span {
+            display: block;
+            font-size: 0.65rem;
+            color: #666;
+            margin-top: 5px;
+            word-break: break-all;
+            text-align: center;
+        }
 
-  img.profile {
-    width: 170px;
-    height: 170px;
-    cursor: pointer;
-  }
+        /* Main Content */
+        main {
+            flex: 1;
+            margin-left: 260px; /* Offset for fixed sidebar */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px;
+        }
 
-  p.quote {
-    font-style: italic;
-    font-size: 1.3em;
-    margin: 10px 0 0;
-  }
+        .header { text-align: center; margin-bottom: 40px; }
 
-  p.subquote {
-    font-size: 0.85em;
-    opacity: 0.7;
-  }
+        .profile-trigger {
+            width: 180px;
+            height: 180px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
 
-  .section {
-    margin-top: 35px;
-    width: min(420px, 90%);
-    text-align: center;
-  }
+        .profile-trigger:active { transform: scale(0.95); }
 
-  h2 {
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    opacity: 0.6;
-    margin-bottom: 10px;
-  }
+        .quote-box { margin-top: 20px; }
+        .quote { font-style: italic; font-size: 1.2rem; margin: 0; }
+        .subquote { font-size: 0.8rem; opacity: 0.5; margin-top: 8px; }
 
-  a.link {
-    display: block;
-    margin: 8px 0;
-    padding: 12px;
-    background: #222;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-  }
+        /* Sections & Links */
+        .section {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
 
-  a.link:hover {
-    background: #444;
-  }
+        .section h2 {
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            opacity: 0.4;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
 
-  /* SAD */
-  .sad {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 110px;
-    cursor: pointer;
-    opacity: 0.8;
-  }
-</style>
+        .link {
+            display: block;
+            padding: 14px;
+            margin: 10px 0;
+            background: var(--accent-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background 0.2s ease, letter-spacing 0.2s ease;
+        }
+
+        .link:hover {
+            background: var(--hover-color);
+            letter-spacing: 1px;
+        }
+
+        /* Floating Mood Icon */
+        .sad-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 100;
+        }
+
+        .sad-trigger:hover { opacity: 1; }
+
+        /* Mobile Adaptability */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: 300px;
+                border-right: none;
+                border-bottom: 1px solid #111;
+            }
+            main { margin-left: 0; padding: 40px 15px; }
+            body { flex-direction: column; }
+        }
+    </style>
 </head>
+<body data-mood="idle">
 
-<body data-layer="surface">
+    <audio id="audio-player"></audio>
 
-<!-- AUDIO -->
-<audio id="audio"></audio>
+    <aside class="sidebar">
+        <div class="sidebar-header">PHOTO ARCHIVE</div>
+        <div id="gallery"></div>
+    </aside>
 
-<!-- SIDEBAR (Flickr Gallery Placeholder) -->
-<div class="sidebar">
-  <h2>PHOTO ARCHIVE</h2>
-  <div id="gallery"></div>
-</div>
+    <main>
+        <div class="header">
+            <img id="profile-img" class="profile-trigger" src="assets/images/profile-static.png" alt="Profile">
+            <div class="quote-box">
+                <p class="quote">"The sun loves you, and I love you too!"</p>
+                <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
+            </div>
+        </div>
 
-<!-- HEADER -->
-<div class="header">
-  <img id="profile" class="profile" src="assets/images/profile-static.png">
-  <p class="quote">"The sun loves you, and I love you too!"</p>
-  <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
-</div>
+        <section class="section">
+            <h2>Crust</h2>
+            <a class="link" href="https://discord.gg/gwCuT2SeFk" target="_blank">discord</a>
+            <a class="link" href="https://www.instagram.com/teejys" target="_blank">instagram</a>
+            <a class="link" href="https://www.tiktok.com/@teejys" target="_blank">tiktok</a>
+            <a class="link" href="https://learningstages.bandcamp.com" target="_blank">bandcamp</a>
+        </section>
 
-<!-- CORE -->
-<div class="section">
-  <h2>CRUST</h2>
-  <a class="link" href="https://discord.gg/gwCuT2SeFk">discord</a>
-  <a class="link" href="https://www.instagram.com/teejys">instagram</a>
-  <a class="link" href="https://www.tiktok.com/@teejys">tiktok</a>
-  <a class="link" href="https://learningstages.bandcamp.com">bandcamp</a>
-</div>
+        <section class="section">
+            <h2>R. House Productions</h2>
+            <a class="link" href="https://rhouseproductions.bandcamp.com/" target="_blank">bandcamp</a>
+            <a class="link" href="https://instagram.com/rhouseproductions" target="_blank">instagram</a>
+        </section>
 
-<!-- R HOUSE (kept intact like you wanted) -->
-<div class="section">
-  <h2>R. HOUSE PRODUCTIONS</h2>
-  <a class="link" href="https://rhouseproductions.bandcamp.com/">bandcamp</a>
-  <a class="link" href="https://instagram.com/rhouseproductions">instagram</a>
-  <a class="link" href="https://facebook.com/revivalhousew00t">facebook</a>
-</div>
+        <section class="section">
+            <h2>Mantle</h2>
+            <a class="link" href="bible.html">lyric bible v1</a>
+            <a class="link" href="https://teejys.substack.com" target="_blank">blog</a>
+            <a class="link" href="mailto:sup@teejys.com">contact</a>
+        </section>
 
-<!-- MANTLE -->
-<div class="section">
-  <h2>MANTLE</h2>
-  <a class="link" href="bible.html">lyric bible v1</a>
-  <a class="link" href="https://teejys.substack.com">blog</a>
-  <a class="link" href="https://drive.google.com/drive/u/2/folders/1G_BrOgVCznKwdNB9xrISMrl0stYxOThN">drive</a>
-</div>
+        <section class="section">
+            <h2>Feed the Abyss</h2>
+            <a class="link" href="https://cash.app/$teejyscash" target="_blank">cash app</a>
+        </section>
+    </main>
 
-<!-- CONTACT -->
-<div class="section">
-  <h2>CONTACT</h2>
-  <a class="link" href="mailto:sup@teejys.com">sup@teejys.com</a>
-</div>
+    <img id="sad-img" class="sad-trigger" src="assets/images/sad.png" alt="Mood">
 
-<!-- CASH APP -->
-<div class="section">
-  <h2>FEED THE ABYSS</h2>
-  <a class="link" href="https://cash.app/$teejyscash">cash app</a>
-</div>
-
-<!-- SAD -->
-<img id="sad" class="sad" src="assets/images/sad.png">
-
-<script>
+    <script>
 const files = [
 "10-24-2023-passport-pic_55224122261_c.jpg",
 "2017-crunchy-rol_55224698479_l.jpg",
