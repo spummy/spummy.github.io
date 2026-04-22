@@ -77,7 +77,7 @@
     border-radius: 8px;
   }
 
-  /* FIXED SAD ICON */
+  /* SAD ICON */
   .sad {
     position: fixed;
     bottom: 20px;
@@ -108,10 +108,10 @@
   <p class="subquote">a system of memory, not identity</p>
 </div>
 
-<!-- MEDIA -->
+<!-- YOUTUBE -->
 <div class="section">
   <h2>presence</h2>
-  <iframe id="ytplayer" class="player" allow="autoplay"></iframe>
+  <iframe id="ytplayer" class="player" allow="encrypted-media"></iframe>
 </div>
 
 <!-- CORE -->
@@ -175,15 +175,20 @@ const player = document.getElementById("ytplayer");
 
 let layer = "surface";
 
+function loadVideo() {
+  const pick = videos[Math.floor(Math.random() * videos.length)];
+
+  // NO autoplay (fixes your issue)
+  player.src =
+    "https://www.youtube.com/embed/" + pick +
+    "?rel=0";
+}
+
 function setLayer(next) {
   layer = next;
   document.body.setAttribute("data-layer", layer);
 
-  const pick = videos[Math.floor(Math.random() * videos.length)];
-
-  player.src =
-    "https://www.youtube.com/embed/" + pick +
-    "?autoplay=1&rel=0";
+  loadVideo();
 
   if (layer === "surface") {
     profile.src = "assets/images/profile-static.png";
@@ -199,6 +204,14 @@ function setLayer(next) {
 
   audio.currentTime = 0;
   audio.play();
+
+  // force play attempt after embed loads
+  setTimeout(() => {
+    player.contentWindow?.postMessage(
+      '{"event":"command","func":"playVideo","args":""}',
+      "*"
+    );
+  }, 500);
 }
 
 profile.onclick = () => setLayer("surface");
