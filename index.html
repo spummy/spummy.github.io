@@ -9,25 +9,26 @@
 <style>
   body {
     margin: 0;
-    padding: 40px 20px 40px 280px;
+    padding: 40px 20px 40px 240px;
     font-family: "Courier New", monospace;
     background: #000;
     color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: filter 0.9s ease, background 0.9s ease;
+    transition: filter 0.9s ease;
   }
 
   body[data-layer="surface"] { filter: brightness(1.05); }
   body[data-layer="profile"] { filter: brightness(0.9) contrast(1.05); }
   body[data-layer="depth"] { filter: brightness(0.65) contrast(1.25); }
 
+  /* SIDEBAR */
   .sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 240px;
+    width: 200px;
     height: 100vh;
     overflow-y: auto;
     background: #050505;
@@ -41,20 +42,16 @@
     font-size: 0.8rem;
     letter-spacing: 2px;
     opacity: 0.7;
-    margin-bottom: 15px;
-  }
-
-  .sidebar a {
-    display: block;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .sidebar img {
     width: 100%;
-    border-radius: 6px;
     display: block;
-    opacity: 0.9;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    opacity: 0.85;
+    transition: 0.2s ease;
   }
 
   .sidebar img:hover {
@@ -62,14 +59,15 @@
     transform: scale(1.02);
   }
 
+  /* MAIN */
   .header {
     text-align: center;
     margin-bottom: 20px;
   }
 
   img.profile {
-    width: 180px;
-    height: 180px;
+    width: 170px;
+    height: 170px;
     cursor: pointer;
   }
 
@@ -82,17 +80,16 @@
   p.subquote {
     font-size: 0.85em;
     opacity: 0.7;
-    margin-top: 5px;
   }
 
   .section {
-    margin-top: 40px;
+    margin-top: 35px;
     width: min(420px, 90%);
     text-align: center;
   }
 
   h2 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 2px;
     opacity: 0.6;
     margin-bottom: 10px;
@@ -106,89 +103,74 @@
     color: #fff;
     text-decoration: none;
     border-radius: 8px;
-    transition: background 0.3s ease;
   }
 
   a.link:hover {
     background: #444;
   }
 
+  /* SAD */
   .sad {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 120px;
+    width: 110px;
     cursor: pointer;
     opacity: 0.8;
-    transition: transform 0.3s ease;
-  }
-
-  .sad:hover {
-    transform: scale(1.1);
   }
 </style>
 </head>
+
 <body data-layer="surface">
 
+<!-- AUDIO -->
+<audio id="audio"></audio>
+
+<!-- SIDEBAR (Flickr Gallery Placeholder) -->
 <div class="sidebar">
   <h2>PHOTO ARCHIVE</h2>
-  <div id="sidebar-gallery"></div>
+  <div id="gallery"></div>
 </div>
 
-<audio id="audio"></audio>
 <!-- HEADER -->
 <div class="header">
   <img id="profile" class="profile" src="assets/images/profile-static.png">
-
   <p class="quote">"The sun loves you, and I love you too!"</p>
   <p class="subquote">ຕາເວັນຮັກເຈົ້າ ຂ້ອຍກໍຮັກເຈົ້າຄືກັນ</p>
 </div>
 
 <!-- CORE -->
 <div class="section">
-  <h2>Crust</h2>
+  <h2>CRUST</h2>
   <a class="link" href="https://discord.gg/gwCuT2SeFk">discord</a>
   <a class="link" href="https://www.instagram.com/teejys">instagram</a>
   <a class="link" href="https://www.tiktok.com/@teejys">tiktok</a>
   <a class="link" href="https://learningstages.bandcamp.com">bandcamp</a>
 </div>
 
-<!-- R HOUSE -->
+<!-- R HOUSE (kept intact like you wanted) -->
 <div class="section">
-  <h2>r. house productions</h2>
+  <h2>R. HOUSE PRODUCTIONS</h2>
   <a class="link" href="https://rhouseproductions.bandcamp.com/">bandcamp</a>
   <a class="link" href="https://instagram.com/rhouseproductions">instagram</a>
   <a class="link" href="https://facebook.com/revivalhousew00t">facebook</a>
 </div>
 
-<!-- ARCHIVE -->
+<!-- MANTLE -->
 <div class="section">
-  <h2>Mantle</h2>
-
-  <a class="link" href="https://drive.google.com/drive/u/2/folders/1G_BrOgVCznKwdNB9xrISMrl0stYxOThN">
-    Google Drive
-  </a>
-
-  <a class="link" href="bible.html">
-    lyric bible v1
-  </a>
-
-  <a class="link" href="https://teejys.substack.com">
-    blog
-  </a>
-
-  <a class="link" href="https://drive.google.com/drive/folders/1ovDCz5IO30Km382JwqhS0sbloTezv5Dm">
-    trombone sheets
-  </a>
+  <h2>MANTLE</h2>
+  <a class="link" href="bible.html">lyric bible v1</a>
+  <a class="link" href="https://teejys.substack.com">blog</a>
+  <a class="link" href="https://drive.google.com/drive/u/2/folders/1G_BrOgVCznKwdNB9xrISMrl0stYxOThN">drive</a>
 </div>
 
 <!-- CONTACT -->
 <div class="section">
-  <h2>contact</h2>
+  <h2>CONTACT</h2>
   <a class="link" href="mailto:sup@teejys.com">sup@teejys.com</a>
 </div>
 
-<!-- SUPPORT -->
+<!-- CASH APP -->
 <div class="section">
   <h2>FEED THE ABYSS</h2>
   <a class="link" href="https://cash.app/$teejyscash">cash app</a>
@@ -205,121 +187,68 @@ const files = [
 "2017-iconic-phoneception_55224451391_l.jpg",
 "2017-my-heart_55224858105_l.jpg",
 "2017-trump-protests-portland-oregon_55224619558_l.jpg",
-"2019-dawning-cerulean-mv-shoot_55224858085_l.jpg",
-"2019-fell-asleep-winter-tour_55224619538_l.jpg",
-"2019-posing-1_55224619528_l.jpg",
-"2019-posing-2_55224619523_l.jpg",
-"2019-posing-3_55224698419_l.jpg",
-"2019-psu-halloween-show---october-2_55223549277_l.jpg",
-"2019-psu-halloween-show---october_55224619518_l.jpg",
-"2019-winter-tour-last-day_55224698404_l.jpg",
-"2020-basement-show-1_55224858045_l.jpg",
-"2020-basement-show-2_55224619503_l.jpg",
-"2020-covid-cosplay_55224698389_l.jpg",
-"2020-got-done-mixing-marmot-ep_55224452196_l.jpg",
-"2020-i-heard-you-like-ur-boiz-thicc_55224698384_l.jpg",
-"2021-aquatic-dancer_55224862800_l.jpg",
-"2021-atticus-photoshot-me-2_55224624233_l.jpg",
-"2021-atticus-photoshot-me-3_55224703364_l.jpg",
-"2021-atticus-photoshot-me-4_55224703354_l.jpg",
-"2021-atticus-photoshot-me-5_55224456276_l.jpg",
-"2021-atticus-photoshot-me_55224862795_l.jpg",
-"2021-my-heart_55224456271_l.jpg",
-"2021-shot-my-first-gun_55224703334_m.jpg",
-"2021-wakey-wakey_55224862775_l.jpg",
-"2022-drove-from-pdx-to-il-with-some-detours---texas-i-think_55224628998_l.jpg",
-"2022-thinkin-bout-the-starzzz-2_55224703344_l.jpg",
-"2022-thinkin-bout-the-starzzz_55224703339_l.jpg",
-"2022-turtle-motivation_55224708224_l.jpg",
-"2022-what-a-smart-and-good-boy-loox-like_55224867645_l.jpg",
-"2023-vanity-pic_55224628993_l.jpg",
-"2024---rorschach-blister---hardcore-bassage_55224708209_l.jpg",
-"2024-baby-my-phone_55223561887_l.jpg",
-"2024-costco-conspirator-much_55224631573_w.jpg",
-"2024-did-you-know-im-an-industry-plant_55224710879_l.jpg",
-"2024-down-we-go_55223562962_l.jpg",
-"2024-got-my-rari_55224708214_l.jpg",
-"2024-guess-which-one-is-my-costco-card-lol_55224460941_l.jpg",
-"2024-keep-holding_55223559137_l.jpg",
-"2024-metamorphosis-era_55224708194_l.jpg",
-"2024-phoneception_55224460936_l.jpg",
-"2024-so-stoked-to-be-here-fr_55224870475_l.jpg",
-"2024-the-courage-to-be-disliked_55224870495_l.jpg",
-"2024-the-other-side_55223561892_l.jpg",
-"2024-this-is-my-costco-card-haha_55224463946_l.jpg",
-"2024-useless-paper-bitch_55224464551_l.jpg",
-"2024-when-i-opened-the-door_55224710869_l.jpg",
-"2024-world-of-dogs_55224463951_l.jpg",
-"2024-you-may-hold-the-applause_55223559132_l.jpg",
-"2025-found-him_55224871880_l.jpg",
-"2025-where-were-you-when-the-sky-fell-black-1_55224712629_l.jpg",
-"2025-where-were-you-when-the-sky-fell-black-2_55224633358_l.jpg",
-"april-1st-2017---met-julian-lage-he-called-me-brother_55224698379_l.jpg",
-"coos-bay-december-10-2018_55223215602_l.jpg",
-"coos-bay-december-10-2018_55223215692_l.jpg",
-"coos-bay-december-10-2018_55224118096_l.jpg",
-"coos-bay-december-10-2018_55224283133_l.jpg",
-"coos-bay-december-10-2018_55224283138_l.jpg",
-"coos-bay-december-10-2018_55224283158_l.jpg"
+"2025-where-were-you-when-the-sky-fell-black-2_55224633358_l.jpg"
 ];
 
-const sidebarGallery = document.getElementById("sidebar-gallery");
+const gallery = document.getElementById("gallery");
 
-files.forEach(file => {
-  const link = document.createElement("a");
-  link.href = "gallery.html";
+files.forEach(f => {
+  const a = document.createElement("a");
+  a.href = "gallery.html";
 
   const img = document.createElement("img");
-  img.src = `assets/gallery/${file}`;
+  img.src = "assets/gallery/" + f;
 
-  link.appendChild(img);
-  sidebarGallery.appendChild(link);
+  a.appendChild(img);
+  gallery.appendChild(a);
 });
 
+/* AUDIO SYSTEM */
 const audio = document.getElementById("audio");
 const profile = document.getElementById("profile");
 const sad = document.getElementById("sad");
 
 let state = "idle";
 
-function stopAudio() {
+function stop() {
   audio.pause();
   audio.src = "";
 }
 
+/* PROFILE */
 profile.onclick = () => {
   if (state === "profile") {
     state = "idle";
     profile.src = "assets/images/profile-static.png";
-    document.body.setAttribute("data-layer", "surface");
-    stopAudio();
+    stop();
     return;
   }
+
   state = "profile";
   profile.src = "assets/images/profile.gif";
   sad.src = "assets/images/sad.png";
-  stopAudio();
+
+  stop();
   audio.src = "assets/audio/here we aint.wav";
   audio.play();
-  document.body.setAttribute("data-layer", "profile");
 };
 
+/* SAD */
 sad.onclick = () => {
   if (state === "sad") {
     state = "idle";
     sad.src = "assets/images/sad.png";
-    profile.src = "assets/images/profile-static.png";
-    document.body.setAttribute("data-layer", "surface");
-    stopAudio();
+    stop();
     return;
   }
+
   state = "sad";
   sad.src = "assets/images/sad.gif";
   profile.src = "assets/images/profile-static.png";
-  stopAudio();
+
+  stop();
   audio.src = "assets/audio/dream.wav";
   audio.play();
-  document.body.setAttribute("data-layer", "depth");
 };
 </script>
 
