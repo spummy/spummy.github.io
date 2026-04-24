@@ -7,35 +7,34 @@
 <link rel="icon" type="image/png" href="assets/images/profile-static.png">
 
 <style>
-  body {
-    margin: 0;
-    padding: 40px 20px 40px 280px;
-    font-family: "Courier New", monospace;
-    background: #000;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: filter 0.9s ease, background 0.9s ease;
-  }
+html, body {
+  min-height: 100%;
+}
 
-  body[data-layer="surface"] { filter: brightness(1.05); }
-  body[data-layer="profile"] { filter: brightness(0.9) contrast(1.05); }
-  body[data-layer="depth"] { filter: brightness(0.65) contrast(1.25); }
+body {
+  margin: 0;
+  padding: 40px 20px 40px 280px;
+  font-family: "Courier New", monospace;
+  background: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: filter 0.9s ease, background 0.9s ease;
+}
 
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 240px;
-    height: 100vh;
-    overflow-y: auto;
-    background: #050505;
-    border-right: 1px solid #111;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100vh;
+  overflow-y: auto;
+  background: #050505;
+  border-right: 1px solid #111;
+  padding: 10px;
+  box-sizing: border-box;
+}
   .sidebar h2 {
     text-align: center;
     font-size: 0.8rem;
@@ -126,6 +125,21 @@
   .sad:hover {
     transform: scale(1.1);
   }
+
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #111;
+    margin-bottom: 20px;
+  }
+}
 </style>
 </head>
 <body data-layer="surface">
@@ -161,7 +175,7 @@
 
 <div class="section">
   <h2>FEED THE ABYSS</h2>
-  <a class="link" href="https://cash.app/$teejyscash" target="_blank">cash app</a>
+  <a class="link" href="https://cash.app/$teejyscash" target="_blank">cash app $teejybucks</a>
 </div>
 
 <img id="sad" class="sad" src="assets/images/sad.png">
@@ -234,7 +248,9 @@ const files = [
 
 const sidebarGallery = document.getElementById("sidebar-gallery");
 
-files.forEach(file => {
+const shuffledFiles = [...files].sort(() => Math.random() - 0.5);
+
+shuffledFiles.forEach(file => {
   const link = document.createElement("a");
   link.href = "gallery.html";
 
